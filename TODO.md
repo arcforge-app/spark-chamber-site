@@ -1,6 +1,6 @@
 # TODO before launch
 
-The site's copy was checked against `arcforge-app/electronics-app` at release 0.2.0 (code, content and docs). This lists what is still missing and what has to happen outside this repo before the site is ready.
+The site's copy was checked against `spark-chamber/electronics-app` at release 0.2.0 (code, content and docs). This lists what is still missing and what has to happen outside this repo before the site is ready.
 
 ## Placeholder links (`href="#"`)
 
@@ -19,7 +19,7 @@ The site's copy was checked against `arcforge-app/electronics-app` at release 0.
 
 ## Outside this repo
 
-- **Feedback repo is private.** "Report a problem" in every footer (except `download.html`) and the Privacy page's "Questions" link go to `github.com/arcforge-app/spark-chamber-feedback`, the URL the app also uses. It returns a 404 for visitors until the repository is made public.
+- **Feedback repo is private.** "Report a problem" in every footer (except `download.html`) and the Privacy page's "Questions" link go to `github.com/spark-chamber/spark-chamber-feedback`, the URL the app also uses. It returns a 404 for visitors until the repository is made public.
 - **Publishing the site.** Merge to `main`, then turn on GitHub Pages (Settings → Pages → deploy from `main`, root folder).
 - **Browser claims.** The Browser card says "Works in current Chrome, Firefox, Safari and Edge". Check that once the web build is hosted.
 - **App store listing.** The app's `snap/snapcraft.yaml` lists `website:` as the private `electronics-app` repo. Point it at this site once it is live.
