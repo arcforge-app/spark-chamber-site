@@ -7,45 +7,44 @@
 <meta name="description" content="A free, deep learning tool for circuits, electronics, and the physics and math behind them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
-<style>
-body{margin:0;background:#0D0F0E}
-a{color:#E8A33D}a:hover{color:#F5C46E}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div style="min-height: 100vh; background: #0D0F0E; color: #E9E6DD; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.6">
+<a class="skip-link" href="#main">Skip to content</a>
 
-<header style="border-bottom: 1px solid #262A27">
-<nav aria-label="Main" style="max-width: 1160px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #E9E6DD">
+<header class="site-header">
+<nav aria-label="Main" class="nav">
+<a href="index.html" class="brand">
 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="12.5" stroke="#3A3F3B"/><circle cx="14" cy="14" r="3" fill="#E8A33D"/><path d="M14 11 L14 3 M16.6 15.5 L23 19.5 M11.4 15.5 L5 19.5" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round"/></svg>
-<span style="font-weight: 600; font-size: 19px; letter-spacing: 0.02em">Spark Chamber</span>
-<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #0D0F0E; background: #A3A69E; padding: 2px 8px; border-radius: 3px">EARLY ACCESS</span>
+<span class="brand-name">Spark Chamber</span>
+<span class="badge">EARLY ACCESS</span>
 </a>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px; font-size: 15px">
-<a href="#tree" style="color: #C9C6BD; text-decoration: none">The tree</a>
-<a href="#work" style="color: #C9C6BD; text-decoration: none">Real work</a>
-<a href="#correct" style="color: #C9C6BD; text-decoration: none">Correctness</a>
-<a href="#support" style="color: #C9C6BD; text-decoration: none">Support</a>
-<a href="download.html" style="color: #15110A; background: #E8A33D; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 4px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Download</a>
+<div class="nav-links">
+<a href="#tree" class="nav-link">The tree</a>
+<a href="#work" class="nav-link">Real work</a>
+<a href="#correct" class="nav-link">Correctness</a>
+<a href="#support" class="nav-link">Support</a>
+<a href="download.html" class="btn btn-sm">Download</a>
 </div>
 </nav>
 </header>
 
-<section style="max-width: 1160px; margin: 0 auto; padding: 72px 24px 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 24px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #A3A69E; letter-spacing: 0.08em">CIRCUITS · ELECTRONICS · SIGNALS · PHYSICS · MATH</p>
-<h1 style="margin: 0; font-size: clamp(38px, 5.5vw, 60px); line-height: 1.08; font-weight: 600; letter-spacing: -0.01em">Learn electricity the way engineers work.</h1>
-<p style="margin: 0; font-size: 19px; color: #C9C6BD; max-width: 34em">A deep, free learning tool for circuits, electronics, and the physics and math behind them. Every topic is a node on one tree. You light it by proving you understand it, then keep it lit.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 8px">
-<a href="#" style="color: #15110A; background: #E8A33D; text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 4px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Open in browser</a>
-<a href="download.html" style="color: #E9E6DD; border: 1px solid #4A504B; text-decoration: none; font-weight: 500; padding: 12px 22px; border-radius: 4px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Download for Linux or Mac</a>
+<main id="main">
+
+<section class="hero split align-center">
+<div class="stack gap-24">
+<p class="eyebrow eyebrow-lg">CIRCUITS · ELECTRONICS · SIGNALS · PHYSICS · MATH</p>
+<h1 class="display">Learn electricity the way engineers work.</h1>
+<p class="lead">A deep, free learning tool for circuits, electronics, and the physics and math behind them. Every topic is a node on one tree. You light it by proving you understand it, then keep it lit.</p>
+<div class="btn-row">
+<a href="#" class="btn">Open in browser</a>
+<a href="download.html" class="btn btn-secondary">Download for Linux or Mac</a>
 </div>
-<p style="margin: 0; font-size: 14px; color: #A3A69E">Free. No account. Your progress stays on your device.</p>
+<p class="fine">Free. No account. Your progress stays on your device.</p>
 </div>
 
-<figure style="margin: 0; display: flex; flex-direction: column; align-items: center; gap: 12px">
-<svg viewBox="0 0 600 600" style="width: 100%; max-width: 540px; height: auto" role="img" aria-label="A radial knowledge tree: the centre and inner topics are lit, the next ring glows as available, the outer rings are still dark.">
+<figure class="figure">
+<svg viewBox="0 0 600 600" class="tree-art" role="img" aria-label="A radial knowledge tree: the centre and inner topics are lit, the next ring glows as available, the outer rings are still dark.">
 <circle cx="300" cy="300" r="70" fill="none" stroke="#1E2220"/>
 <circle cx="300" cy="300" r="130" fill="none" stroke="#1E2220"/>
 <circle cx="300" cy="300" r="190" fill="none" stroke="#1E2220"/>
@@ -88,45 +87,45 @@ a{color:#E8A33D}a:hover{color:#F5C46E}
 <circle cx="300" cy="300" r="15" fill="#E8A33D"/>
 <circle cx="300" cy="300" r="22" fill="none" stroke="#E8A33D" stroke-opacity="0.45"/>
 </svg>
-<figcaption style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E">Centre: charge, voltage, current. Outward: everything built on them.</figcaption>
+<figcaption class="caption">Centre: charge, voltage, current. Outward: everything built on them.</figcaption>
 </figure>
 </section>
 
-<section id="tree" style="border-top: 1px solid #262A27; background: #111412">
-<div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 12px; max-width: 46em">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E; letter-spacing: 0.08em">01 · THE TREE</p>
-<h2 style="margin: 0; font-size: 36px; line-height: 1.2; font-weight: 600">One tree for all of electricity.</h2>
-<p style="margin: 0; color: #C9C6BD">Topics radiate from the fundamentals into circuits, electronics, digital logic, signal processing, math, physics and particle physics. Every line between two nodes is a real prerequisite, so you always know why something is locked and what it leads to.</p>
+<section id="tree" class="band band-alt">
+<div class="container stack gap-32">
+<div class="section-intro">
+<p class="eyebrow">01 · THE TREE</p>
+<h2 class="title-lg">One tree for all of electricity.</h2>
+<p class="text">Topics radiate from the fundamentals into circuits, electronics, digital logic, signal processing, math, physics and particle physics. Every line between two nodes is a real prerequisite, so you always know why something is locked and what it leads to.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px">
-<div style="background: #0D0F0E; border: 1px solid #262A27; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#0D0F0E" stroke="#3A3F3B" stroke-width="1.5"/></svg><strong style="font-weight: 600">Dark</strong></div>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Not reachable yet. You can see it, and how far the subject goes.</p>
+<div class="cards">
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#0D0F0E" stroke="#3A3F3B" stroke-width="1.5"/></svg><strong>Dark</strong></div>
+<p class="note">Not reachable yet. You can see it, and how far the subject goes.</p>
 </div>
-<div style="background: #0D0F0E; border: 1px solid #262A27; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#1A1D1B" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="3 3"/></svg><strong style="font-weight: 600">Glow</strong></div>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Ready to learn. Every prerequisite is already lit.</p>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#1A1D1B" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="3 3"/></svg><strong>Glow</strong></div>
+<p class="note">Ready to learn. Every prerequisite is already lit.</p>
 </div>
-<div style="background: #0D0F0E; border: 1px solid #262A27; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D"/></svg><strong style="font-weight: 600">Lit</strong></div>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Mastered: proven with correct answers in a row, without hints.</p>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D"/></svg><strong>Lit</strong></div>
+<p class="note">Mastered: proven with correct answers in a row, without hints.</p>
 </div>
-<div style="background: #0D0F0E; border: 1px solid #262A27; border-radius: 6px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
-<div style="display: flex; align-items: center; gap: 10px"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D" fill-opacity="0.4" stroke="#E8A33D" stroke-width="1.5"/></svg><strong style="font-weight: 600">Dim</strong></div>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Fading. Charge decays like a capacitor until you review it.</p>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D" fill-opacity="0.4" stroke="#E8A33D" stroke-width="1.5"/></svg><strong>Dim</strong></div>
+<p class="note">Fading. Charge decays like a capacitor until you review it.</p>
 </div>
 </div>
 </div>
 </section>
 
-<section id="work" style="border-top: 1px solid #262A27">
-<div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 48px; align-items: start">
-<div style="display: flex; flex-direction: column; gap: 16px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E; letter-spacing: 0.08em">02 · REAL WORK</p>
-<h2 style="margin: 0; font-size: 36px; line-height: 1.2; font-weight: 600">Design to spec. Pass review. The way professionals do it.</h2>
-<p style="margin: 0; color: #C9C6BD">Work orders are real design jobs with real constraints. You choose parts from standard values, draw the schematic, simulate it, check it at tolerance corners, and pass a design review against real derating rules.</p>
-<ol style="margin: 0; padding-left: 22px; color: #C9C6BD; display: flex; flex-direction: column; gap: 6px">
+<section id="work" class="band">
+<div class="container split align-start">
+<div class="stack gap-16">
+<p class="eyebrow">02 · REAL WORK</p>
+<h2 class="title-lg">Design to spec. Pass review. The way professionals do it.</h2>
+<p class="text">Work orders are real design jobs with real constraints. You choose parts from standard values, draw the schematic, simulate it, check it at tolerance corners, and pass a design review against real derating rules.</p>
+<ol class="list gap-6">
 <li>Requirements</li>
 <li>Part selection from datasheet ratings</li>
 <li>Schematic capture</li>
@@ -135,96 +134,97 @@ a{color:#E8A33D}a:hover{color:#F5C46E}
 <li>Design review</li>
 <li>Bill of materials</li>
 </ol>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Nothing explodes. A design that misses the spec fails review, with the finding written the way a reviewer would write it.</p>
+<p class="note">Nothing explodes. A design that misses the spec fails review, with the finding written the way a reviewer would write it.</p>
 </div>
 
-<div style="display: flex; flex-direction: column; gap: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 14px">
-<div style="background: #141715; border: 1px solid #2C312D; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; justify-content: space-between; gap: 12px; color: #A3A69E"><span>WORK ORDER</span><span>WO-B07</span></div>
-<div style="font-family: 'IBM Plex Sans', sans-serif; font-size: 20px; font-weight: 600; color: #E9E6DD">Reference voltage</div>
-<div style="display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; color: #C9C6BD">
-<span style="color: #A3A69E">Source</span><span>9 V battery</span>
-<span style="color: #A3A69E">Output</span><span>3.3 V ±2%, worst case</span>
-<span style="color: #A3A69E">Parts</span><span>E12 resistors, 5%, 1/4 W</span>
-<span style="color: #A3A69E">Budget</span><span>&lt; 20 mW</span>
+<div class="stack gap-16 mono">
+<div class="panel">
+<div class="panel-head"><span>WORK ORDER</span><span>WO-B07</span></div>
+<div class="panel-title">Reference voltage</div>
+<div class="spec">
+<span class="key">Source</span><span>9 V battery</span>
+<span class="key">Output</span><span>3.3 V ±2%, worst case</span>
+<span class="key">Parts</span><span>E12 resistors, 5%, 1/4 W</span>
+<span class="key">Budget</span><span>&lt; 20 mW</span>
 </div>
 </div>
-<div style="background: #141715; border: 1px solid #2C312D; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
-<div style="display: flex; justify-content: space-between; gap: 12px; color: #A3A69E"><span>DESIGN REVIEW</span><span>R1 8.2 kΩ · R2 4.7 kΩ</span></div>
-<div style="display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 6px 12px; color: #C9C6BD">
-<span style="color: #A3A69E">Nominal</span><span>3.28 V · 6.3 mW · pass</span>
-<span style="color: #A3A69E">Power</span><span>R1 4.0 mW, 1.6% of rating · pass</span>
+<div class="panel">
+<div class="panel-head"><span>DESIGN REVIEW</span><span>R1 8.2 kΩ · R2 4.7 kΩ</span></div>
+<div class="spec">
+<span class="key">Nominal</span><span>3.28 V · 6.3 mW · pass</span>
+<span class="key">Power</span><span>R1 4.0 mW, 1.6% of rating · pass</span>
 </div>
-<div style="border-top: 1px solid #2C312D; padding-top: 10px; display: flex; gap: 10px; align-items: baseline">
-<span style="color: #0D0F0E; background: #F08A6C; padding: 1px 8px; border-radius: 3px; font-weight: 600">FAIL</span>
-<span style="color: #E9E6DD">3.07 V at tolerance corner (R1 +5%, R2 −5%). Spec minimum 3.234 V.</span>
+<div class="verdict">
+<span class="tag-fail">FAIL</span>
+<span class="verdict-text">3.07 V at tolerance corner (R1 +5%, R2 −5%). Spec minimum 3.234 V.</span>
 </div>
 </div>
 </div>
 </div>
 </section>
 
-<section id="correct" style="border-top: 1px solid #262A27; background: #111412">
-<div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 12px; max-width: 46em">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E; letter-spacing: 0.08em">03 · CORRECTNESS</p>
-<h2 style="margin: 0; font-size: 36px; line-height: 1.2; font-weight: 600">Correct, or it doesn't ship.</h2>
-<p style="margin: 0; color: #C9C6BD">A wrong answer costs more trust than a missing topic. Every problem goes through the same checks before it reaches you.</p>
+<section id="correct" class="band band-alt">
+<div class="container stack gap-32">
+<div class="section-intro">
+<p class="eyebrow">03 · CORRECTNESS</p>
+<h2 class="title-lg">Correct, or it doesn't ship.</h2>
+<p class="text">A wrong answer costs more trust than a missing topic. Every problem goes through the same checks before it reaches you.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px">
-<div style="border-top: 2px solid #E8A33D; padding-top: 16px; display: flex; flex-direction: column; gap: 6px"><strong style="font-weight: 600">Computed</strong><span style="font-size: 15px; color: #A3A69E">Answers come from formulas, never typed in by hand.</span></div>
-<div style="border-top: 2px solid #E8A33D; padding-top: 16px; display: flex; flex-direction: column; gap: 6px"><strong style="font-weight: 600">Tested</strong><span style="font-size: 15px; color: #A3A69E">Each problem type is checked against a hand-worked value.</span></div>
-<div style="border-top: 2px solid #E8A33D; padding-top: 16px; display: flex; flex-direction: column; gap: 6px"><strong style="font-weight: 600">Cross-checked</strong><span style="font-size: 15px; color: #A3A69E">A circuit solver re-derives circuit answers independently.</span></div>
-<div style="border-top: 2px solid #E8A33D; padding-top: 16px; display: flex; flex-direction: column; gap: 6px"><strong style="font-weight: 600">Reviewed</strong><span style="font-size: 15px; color: #A3A69E">Content is verified and reviewed against cited sources.</span></div>
+<div class="cards">
+<div class="check"><strong>Computed</strong><span class="note">Answers come from formulas, never typed in by hand.</span></div>
+<div class="check"><strong>Tested</strong><span class="note">Each problem type is checked against a hand-worked value.</span></div>
+<div class="check"><strong>Cross-checked</strong><span class="note">A circuit solver re-derives circuit answers independently.</span></div>
+<div class="check"><strong>Reviewed</strong><span class="note">Content is verified and reviewed against cited sources.</span></div>
 </div>
-<p style="margin: 0; font-size: 15px; color: #A3A69E">Found a mistake anyway? Every problem has a Report button. Reports are read and fixed.</p>
-</div>
-</section>
-
-<section style="border-top: 1px solid #262A27">
-<div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px; display: flex; flex-direction: column; gap: 24px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E; letter-spacing: 0.08em">04 · WHAT'S IN IT</p>
-<h2 style="margin: 0; font-size: 36px; line-height: 1.2; font-weight: 600">From charge to particle physics.</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 14px">
-<span style="border: 1px solid #E8A33D; color: #E9E6DD; padding: 8px 14px; border-radius: 4px">Circuits</span>
-<span style="border: 1px solid #E8A33D; color: #E9E6DD; padding: 8px 14px; border-radius: 4px">Electronics</span>
-<span style="border: 1px solid #3A3F3B; color: #A3A69E; padding: 8px 14px; border-radius: 4px">Digital logic</span>
-<span style="border: 1px solid #3A3F3B; color: #A3A69E; padding: 8px 14px; border-radius: 4px">Signal processing</span>
-<span style="border: 1px solid #3A3F3B; color: #A3A69E; padding: 8px 14px; border-radius: 4px">Math</span>
-<span style="border: 1px solid #3A3F3B; color: #A3A69E; padding: 8px 14px; border-radius: 4px">Physics</span>
-<span style="border: 1px solid #3A3F3B; color: #A3A69E; padding: 8px 14px; border-radius: 4px">Particle physics</span>
-</div>
-<p style="margin: 0; color: #C9C6BD">In Early Access now: [AVAILABLE REGIONS AND TOPIC COUNT]. The rest of the tree is being written, checked and reviewed, one region at a time.</p>
+<p class="note">Found a mistake anyway? Every problem has a Report button. Reports are read and fixed.</p>
 </div>
 </section>
 
-<section id="support" style="border-top: 1px solid #262A27; background: #111412">
-<div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 40px; align-items: center">
-<div style="display: flex; flex-direction: column; gap: 14px">
-<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A3A69E; letter-spacing: 0.08em">05 · FREE</p>
-<h2 style="margin: 0; font-size: 36px; line-height: 1.2; font-weight: 600">Learning is free. Forever.</h2>
-<p style="margin: 0; color: #C9C6BD">Every topic, problem and tool is free. No ads, no paid learning, no selling your data. Spark Chamber is supported by people who find it useful.</p>
+<section class="band">
+<div class="container stack gap-24">
+<p class="eyebrow">04 · WHAT'S IN IT</p>
+<h2 class="title-lg">From charge to particle physics.</h2>
+<div class="chips">
+<span class="chip chip-on">Circuits</span>
+<span class="chip chip-on">Electronics</span>
+<span class="chip">Digital logic</span>
+<span class="chip">Signal processing</span>
+<span class="chip">Math</span>
+<span class="chip">Physics</span>
+<span class="chip">Particle physics</span>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start">
-<a href="#" style="color: #15110A; background: #E8A33D; text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 4px; min-height: 48px; box-sizing: border-box; display: inline-flex; align-items: center">Support Spark Chamber</a>
-<span style="font-size: 14px; color: #A3A69E">Optional, on Ko-fi: [KO-FI LINK]. Support is not tax-deductible.</span>
+<p class="text">In Early Access now: [AVAILABLE REGIONS AND TOPIC COUNT]. The rest of the tree is being written, checked and reviewed, one region at a time.</p>
+</div>
+</section>
+
+<section id="support" class="band band-alt">
+<div class="container split gap-40 align-center">
+<div class="stack gap-14">
+<p class="eyebrow">05 · FREE</p>
+<h2 class="title-lg">Learning is free. Forever.</h2>
+<p class="text">Every topic, problem and tool is free. No ads, no paid learning, no selling your data. Spark Chamber is supported by people who find it useful.</p>
+</div>
+<div class="actions">
+<a href="#" class="btn">Support Spark Chamber</a>
+<span class="fine">Optional, on Ko-fi: [KO-FI LINK]. Support is not tax-deductible.</span>
 </div>
 </div>
 </section>
 
-<footer style="border-top: 1px solid #262A27">
-<div style="max-width: 1160px; margin: 0 auto; padding: 32px 24px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; font-size: 14px; color: #A3A69E">
+</main>
+
+<footer class="site-footer">
+<div class="footer-inner">
 <span>Spark Chamber · Early Access [VERSION]</span>
-<div style="display: flex; flex-wrap: wrap; gap: 20px">
-<a href="download.html" style="color: #C9C6BD">Download</a>
-<a href="#" style="color: #C9C6BD">Privacy</a>
-<a href="#" style="color: #C9C6BD">Credits</a>
-<a href="#" style="color: #C9C6BD">Safety</a>
-<a href="#" style="color: #C9C6BD">Report a problem</a>
+<div class="footer-links">
+<a href="download.html">Download</a>
+<a href="privacy.html">Privacy</a>
+<a href="credits.html">Credits</a>
+<a href="safety.html">Safety</a>
+<a href="https://github.com/arcforge-app/spark-chamber-feedback/issues/new/choose">Report a problem</a>
 </div>
 </div>
 </footer>
 
-</div>
 </body>
 </html>
