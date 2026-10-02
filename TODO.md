@@ -7,6 +7,7 @@ The site's copy was checked against `spark-chamber/electronics-app` at release 0
 | Link | Where | Points to | Blocked on |
 |---|---|---|---|
 | Open in browser | `index.html` 46, `download.html` 49 | The hosted web app | The web app (in progress in another chat) |
+| Get it from the Snap Store | `download.html` 55 | `https://snapcraft.io/spark-chamber` | Registering the name and uploading the first beta (app docs/QUESTIONS.md Q14, docs/RELEASE.md) |
 | Support Spark Chamber | `index.html` 216 | The Ko-fi page | Creating the Ko-fi page (app Q19) |
 | Support (nav and footer) | `download.html` 31, 121 | The Ko-fi page (or `index.html#support`) | Same |
 
