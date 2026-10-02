@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://sparkchamber.app/feedback.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=0.3.0-2">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -41,46 +41,48 @@
 </section>
 
 <div class="page-body">
-<form class="feedback-form" id="feedback-form" method="post" action="https://spark-chamber-feedback.sparkchamber.workers.dev">
+<div class="feedback-layout">
+
+<form class="feedback-card" id="feedback-form" method="post" action="https://spark-chamber-feedback.sparkchamber.workers.dev">
 
 <p class="notice" id="form-status" role="alert" hidden></p>
 
-<div class="field">
-<label for="kind">What kind of feedback is it?</label>
-<select id="kind" name="kind" required>
-<option value="wrong-answer">The expected answer looks wrong</option>
-<option value="marked-wrong">My correct answer was marked wrong</option>
-<option value="unclear">The question or explanation is unclear</option>
-<option value="drawing">A drawing or the simulator looks wrong</option>
-<option value="bug">The app misbehaves or crashes</option>
-<option value="idea">An idea or request</option>
-<option value="other">Something else</option>
-</select>
+<fieldset class="kind-group">
+<legend>What kind of feedback is it?</legend>
+<div class="kind-grid">
+<label class="kind-tile"><input type="radio" name="kind" value="wrong-answer" required checked><span class="kind-name">Wrong answer</span><span class="kind-desc">The expected answer looks wrong</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="marked-wrong"><span class="kind-name">Marked wrong</span><span class="kind-desc">My correct answer was marked wrong</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="unclear"><span class="kind-name">Unclear</span><span class="kind-desc">The question or explanation is confusing</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="drawing"><span class="kind-name">Drawing or simulator</span><span class="kind-desc">A schematic, plot, or simulation looks wrong</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="bug"><span class="kind-name">Bug or crash</span><span class="kind-desc">The app misbehaves or crashes</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="idea"><span class="kind-name">Idea</span><span class="kind-desc">Something you would like to see</span></label>
+<label class="kind-tile"><input type="radio" name="kind" value="other"><span class="kind-name">Something else</span><span class="kind-desc">Anything that doesn’t fit above</span></label>
 </div>
+</fieldset>
 
 <div class="field">
 <label for="message">What happened?</label>
+<textarea id="message" name="message" rows="6" maxlength="5000" required aria-describedby="message-hint" placeholder="For example: The expected answer is 3.3 V, but R1 = 8.2 kΩ and R2 = 4.7 kΩ from 9 V give 3.28 V."></textarea>
 <p class="hint" id="message-hint">Say what you expected and what you saw. For an idea, say what it would help you learn or do.</p>
-<textarea id="message" name="message" rows="7" maxlength="5000" required aria-describedby="message-hint"></textarea>
 </div>
 
 <details class="field-group" id="problem-details">
 <summary>Problem details from the app</summary>
-<p class="hint">When you use Report a problem in the app, these fields fill in by themselves. They let us open the exact problem you saw.</p>
+<p class="hint">Report a problem in the app fills these in by itself. They let us open the exact problem you saw.</p>
 <div class="field-grid">
-<div class="field"><label for="topic">Topic</label><input type="text" id="topic" name="topic" maxlength="200" autocomplete="off"></div>
-<div class="field"><label for="problem">Problem</label><input type="text" id="problem" name="problem" maxlength="200" autocomplete="off"></div>
-<div class="field"><label for="seed">Seed</label><input type="text" id="seed" name="seed" maxlength="200" autocomplete="off"></div>
-<div class="field"><label for="answer">Your answer</label><input type="text" id="answer" name="answer" maxlength="200" autocomplete="off"></div>
-<div class="field"><label for="expected">Expected answer</label><input type="text" id="expected" name="expected" maxlength="200" autocomplete="off"></div>
-<div class="field"><label for="version">App version</label><input type="text" id="version" name="version" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="topic">Topic</label><input type="text" id="topic" name="topic" maxlength="200" autocomplete="off" placeholder="dividers"></div>
+<div class="field"><label for="problem">Problem</label><input type="text" id="problem" name="problem" maxlength="200" autocomplete="off" placeholder="div_design_pair"></div>
+<div class="field"><label for="seed">Seed</label><input type="text" id="seed" name="seed" maxlength="200" autocomplete="off" placeholder="9"></div>
+<div class="field"><label for="answer">Your answer</label><input type="text" id="answer" name="answer" maxlength="200" autocomplete="off" placeholder="3.0 V"></div>
+<div class="field"><label for="expected">Expected answer</label><input type="text" id="expected" name="expected" maxlength="200" autocomplete="off" placeholder="3.3 V"></div>
+<div class="field"><label for="version">App version</label><input type="text" id="version" name="version" maxlength="200" autocomplete="off" placeholder="0.3.0"></div>
 </div>
 </details>
 
 <div class="field">
-<label for="email">Email (optional)</label>
-<p class="hint" id="email-hint">Only if you'd like a reply. It's stored with your report and used for nothing else.</p>
-<input id="email" name="email" type="email" maxlength="200" autocomplete="email" aria-describedby="email-hint">
+<label for="email">Email <span class="optional">(optional)</span></label>
+<input id="email" name="email" type="email" maxlength="200" autocomplete="email" aria-describedby="email-hint" placeholder="you@example.com">
+<p class="hint" id="email-hint">Only if you'd like a reply. We use it for nothing else.</p>
 </div>
 
 <div class="trap" aria-hidden="true">
@@ -88,15 +90,24 @@
 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
 </div>
 
+<div class="form-footer">
 <div class="cf-turnstile" data-sitekey="0x4AAAAAAFLqcBtSJG9R3Zq2" data-theme="dark"></div>
-
-<div class="btn-row">
 <button type="submit" class="btn">Send feedback</button>
 </div>
 
-<p class="fine">Your report goes to a private list that only the Spark Chamber team can read. We store what you write and the problem details, but not your IP address. A Cloudflare check guards the form against spam. See the <a href="privacy.html">Privacy page</a> for details.</p>
-
 </form>
+
+<aside class="feedback-aside">
+<h2 class="aside-title">What happens next</h2>
+<ol class="steps">
+<li><strong>Your report is filed privately.</strong> Only the Spark Chamber team can read it.</li>
+<li><strong>We check it against the app.</strong> With the problem details, we can reopen the exact problem you saw.</li>
+<li><strong>We fix it in a release.</strong> If you left an email address, we'll tell you when the fix is out.</li>
+</ol>
+<p class="fine">We store what you write and the problem details, but not your IP address. A Cloudflare check guards the form against spam. See the <a href="privacy.html">Privacy page</a>.</p>
+</aside>
+
+</div>
 </div>
 
 <script>
@@ -112,7 +123,7 @@
   fields.forEach(function (name) {
     var value = params.get(name) || draft[name];
     if (!value || !form.elements[name]) return;
-    if (name === 'kind' && !form.querySelector('option[value="' + CSS.escape(value) + '"]')) return;
+    if (name === 'kind' && !form.querySelector('input[name="kind"][value="' + CSS.escape(value) + '"]')) return;
     form.elements[name].value = value.slice(0, 5000);
     if (['topic', 'problem', 'seed', 'answer', 'expected', 'version'].indexOf(name) >= 0) filled = true;
   });
