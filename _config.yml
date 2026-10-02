@@ -3,3 +3,4 @@ exclude:
   - README.md
   - TODO.md
   - STYLE.md
+  - feedback-worker

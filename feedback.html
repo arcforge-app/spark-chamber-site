@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback · Spark Chamber</title>
+<meta name="description" content="Report a wrong answer, a confusing question, or a bug in Spark Chamber, or share an idea. No account needed.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spark Chamber">
+<meta property="og:title" content="Feedback · Spark Chamber">
+<meta property="og:description" content="Report a wrong answer, a confusing question, or a bug in Spark Chamber, or share an idea. No account needed.">
+<meta property="og:url" content="https://sparkchamber.app/feedback.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+<nav aria-label="Main" class="nav">
+<a href="index.html" class="brand">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="12.5" stroke="#3A3F3B"/><circle cx="14" cy="14" r="3" fill="#E8A33D"/><path d="M14 11 L14 3 M16.6 15.5 L23 19.5 M11.4 15.5 L5 19.5" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round"/></svg>
+<span class="brand-name">Spark Chamber</span>
+<span class="badge">EARLY ACCESS</span>
+</a>
+<div class="nav-links">
+<a href="index.html" class="nav-link">Home</a>
+<a href="download.html" class="btn btn-sm">Download</a>
+</div>
+</nav>
+</header>
+
+<main id="main">
+
+<section class="page-intro stack gap-14">
+<p class="eyebrow">FEEDBACK</p>
+<h1 class="display-sm">Report a problem or share an idea</h1>
+<p class="lead lead-wide">Found a wrong answer, a confusing question, or a bug? Tell us here. You don't need an account.</p>
+</section>
+
+<div class="page-body">
+<form class="feedback-form" id="feedback-form" method="post" action="[WORKER URL]">
+
+<p class="notice" id="form-status" role="alert" hidden></p>
+
+<div class="field">
+<label for="kind">What kind of feedback is it?</label>
+<select id="kind" name="kind" required>
+<option value="wrong-answer">The expected answer looks wrong</option>
+<option value="marked-wrong">My correct answer was marked wrong</option>
+<option value="unclear">The question or explanation is unclear</option>
+<option value="drawing">A drawing or the simulator looks wrong</option>
+<option value="bug">The app misbehaves or crashes</option>
+<option value="idea">An idea or request</option>
+<option value="other">Something else</option>
+</select>
+</div>
+
+<div class="field">
+<label for="message">What happened?</label>
+<p class="hint" id="message-hint">Say what you expected and what you saw. For an idea, say what it would help you learn or do.</p>
+<textarea id="message" name="message" rows="7" maxlength="5000" required aria-describedby="message-hint"></textarea>
+</div>
+
+<details class="field-group" id="problem-details">
+<summary>Problem details from the app</summary>
+<p class="hint">When you use Report a problem in the app, these fields fill in by themselves. They let us open the exact problem you saw.</p>
+<div class="field-grid">
+<div class="field"><label for="topic">Topic</label><input type="text" id="topic" name="topic" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="problem">Problem</label><input type="text" id="problem" name="problem" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="seed">Seed</label><input type="text" id="seed" name="seed" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="answer">Your answer</label><input type="text" id="answer" name="answer" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="expected">Expected answer</label><input type="text" id="expected" name="expected" maxlength="200" autocomplete="off"></div>
+<div class="field"><label for="version">App version</label><input type="text" id="version" name="version" maxlength="200" autocomplete="off"></div>
+</div>
+</details>
+
+<div class="field">
+<label for="email">Email (optional)</label>
+<p class="hint" id="email-hint">Only if you'd like a reply. It's stored with your report and used for nothing else.</p>
+<input id="email" name="email" type="email" maxlength="200" autocomplete="email" aria-describedby="email-hint">
+</div>
+
+<div class="trap" aria-hidden="true">
+<label for="website">Leave this field empty</label>
+<input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+</div>
+
+<div class="cf-turnstile" data-sitekey="[TURNSTILE SITE KEY]" data-theme="dark"></div>
+
+<div class="btn-row">
+<button type="submit" class="btn">Send feedback</button>
+</div>
+
+<p class="fine">Your report goes to a private list that only the Spark Chamber team can read. We store what you write and the problem details, but not your IP address. A Cloudflare check guards the form against spam. See the <a href="privacy.html">Privacy page</a> for details.</p>
+
+</form>
+</div>
+
+<script>
+// Fill the form from the link the app opens, keep a draft if sending fails,
+// and explain why when the receiver sends someone back.
+(function () {
+  var form = document.getElementById('feedback-form');
+  var params = new URLSearchParams(location.search);
+  var fields = ['kind', 'message', 'topic', 'problem', 'seed', 'answer', 'expected', 'version', 'email'];
+  var draft = {};
+  try { draft = JSON.parse(sessionStorage.getItem('feedback-draft') || '{}'); } catch (e) {}
+  var filled = false;
+  fields.forEach(function (name) {
+    var value = params.get(name) || draft[name];
+    if (!value || !form.elements[name]) return;
+    if (name === 'kind' && !form.querySelector('option[value="' + CSS.escape(value) + '"]')) return;
+    form.elements[name].value = value.slice(0, 5000);
+    if (['topic', 'problem', 'seed', 'answer', 'expected', 'version'].indexOf(name) >= 0) filled = true;
+  });
+  if (filled) document.getElementById('problem-details').open = true;
+
+  var messages = {
+    invalid: 'Something in the form was missing or too long. Check the fields and send it again.',
+    check: "The spam check didn't finish. Wait for it to show a check mark, then send again.",
+    error: "Your report couldn't be saved just now. Your text is still here, so try again in a few minutes."
+  };
+  var status = params.get('status');
+  if (messages[status]) {
+    var box = document.getElementById('form-status');
+    box.textContent = messages[status];
+    box.hidden = false;
+  }
+
+  form.addEventListener('submit', function () {
+    var data = {};
+    fields.forEach(function (name) { data[name] = form.elements[name].value; });
+    try { sessionStorage.setItem('feedback-draft', JSON.stringify(data)); } catch (e) {}
+  });
+})();
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+</main>
+
+<footer class="site-footer">
+<div class="footer-inner">
+<span>Spark Chamber · Early Access 0.2.0</span>
+<div class="footer-links">
+<a href="index.html">Home</a>
+<a href="download.html">Download</a>
+<a href="privacy.html">Privacy</a>
+<a href="credits.html">Credits</a>
+<a href="safety.html">Safety</a>
+<a href="feedback.html" aria-current="page">Report a problem</a>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
