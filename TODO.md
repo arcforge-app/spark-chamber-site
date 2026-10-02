@@ -13,7 +13,7 @@ The site's copy was checked against `spark-chamber/electronics-app` at release 0
 
 ## Feedback form
 
-- `feedback.html` has two placeholders: `[WORKER URL]` (the form's `action`) and `[TURNSTILE SITE KEY]`. Fill them in after the one-time setup in `feedback-worker/README.md`. Until then the form can't send.
+- The form posts to the Worker at `https://spark-chamber-feedback.sparkchamber.workers.dev` (Turnstile site key `0x4AAAAAAFLqcBtSJG9R3Zq2`). The GitHub token in the Worker expires after a year; renew it as described in `feedback-worker/README.md`.
 - The app's Report a problem still copies text for GitHub. Next, it should open `https://sparkchamber.app/feedback.html?kind=…&topic=…&problem=…&seed=…&answer=…&expected=…&version=…`. That needs a way to open the browser: the `url_launcher` package, which needs the owner's approval per the app's CLAUDE.md.
 - Weekly analysis: a scheduled Claude run that reads new issues in the feedback repo, groups them by topic and problem, reproduces "wrong answer" reports from their seed, and posts a summary.
 

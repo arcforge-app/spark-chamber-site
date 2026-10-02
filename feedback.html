@@ -41,7 +41,7 @@
 </section>
 
 <div class="page-body">
-<form class="feedback-form" id="feedback-form" method="post" action="[WORKER URL]">
+<form class="feedback-form" id="feedback-form" method="post" action="https://spark-chamber-feedback.sparkchamber.workers.dev">
 
 <p class="notice" id="form-status" role="alert" hidden></p>
 
@@ -88,7 +88,7 @@
 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
 </div>
 
-<div class="cf-turnstile" data-sitekey="[TURNSTILE SITE KEY]" data-theme="dark"></div>
+<div class="cf-turnstile" data-sitekey="0x4AAAAAAFLqcBtSJG9R3Zq2" data-theme="dark"></div>
 
 <div class="btn-row">
 <button type="submit" class="btn">Send feedback</button>
@@ -128,13 +128,6 @@
     var box = document.getElementById('form-status');
     box.textContent = messages[status];
     box.hidden = false;
-  }
-
-  if (form.getAttribute('action').indexOf('[') === 0) {
-    var notice = document.getElementById('form-status');
-    notice.textContent = "The feedback form isn't connected yet. It will be ready soon.";
-    notice.hidden = false;
-    form.querySelector('button[type=submit]').disabled = true;
   }
 
   form.addEventListener('submit', function () {
