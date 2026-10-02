@@ -130,6 +130,13 @@
     box.hidden = false;
   }
 
+  if (form.getAttribute('action').indexOf('[') === 0) {
+    var notice = document.getElementById('form-status');
+    notice.textContent = "The feedback form isn't connected yet. It will be ready soon.";
+    notice.hidden = false;
+    form.querySelector('button[type=submit]').disabled = true;
+  }
+
   form.addEventListener('submit', function () {
     var data = {};
     fields.forEach(function (name) { data[name] = form.elements[name].value; });

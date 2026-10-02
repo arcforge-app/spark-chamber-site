@@ -16,7 +16,7 @@ The site follows the main technical-writing style guides: the Google developer d
 ## Headings and labels
 
 - Use sentence case: capitalize only the first word and proper nouns.
-- Don't end headings, titles, button labels or link text with a period.
+- Don't end headings, titles, button labels, or link text with a period.
 - One idea per heading. Join two short phrases with a comma, not a period ("Battery or USB power, 12 V or less").
 - Make link text describe the destination ("Read the safety notes"), never "click here".
 
@@ -30,8 +30,8 @@ The site follows the main technical-writing style guides: the Google developer d
 ## Numbers and units
 
 - Use a non-breaking space between a number and its unit (`12&nbsp;V`, `3.9&nbsp;kΩ`). There's no space before % (5%).
-- Spell out zero through nine in prose ("five correct answers"). Use numerals for 10 and up, and for all measurements, versions and dates.
-- Write dates as YYYY-MM-DD.
+- Spell out zero through nine in prose ("five correct answers"). Use numerals for 10 and up, and for all measurements, versions, and dates.
+- Write dates the American way: October 2, 2026.
 
 ## Terms
 
