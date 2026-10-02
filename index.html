@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spark Chamber — learn electricity the way engineers work</title>
+<meta name="description" content="A free, deep learning tool for circuits, electronics, and the physics and math behind them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+<nav aria-label="Main" class="nav">
+<a href="index.html" class="brand">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><circle cx="14" cy="14" r="12.5" stroke="#3A3F3B"/><circle cx="14" cy="14" r="3" fill="#E8A33D"/><path d="M14 11 L14 3 M16.6 15.5 L23 19.5 M11.4 15.5 L5 19.5" stroke="#E8A33D" stroke-width="1.6" stroke-linecap="round"/></svg>
+<span class="brand-name">Spark Chamber</span>
+<span class="badge">EARLY ACCESS</span>
+</a>
+<div class="nav-links">
+<a href="#tree" class="nav-link">The tree</a>
+<a href="#work" class="nav-link">Real work</a>
+<a href="#correct" class="nav-link">Correctness</a>
+<a href="#support" class="nav-link">Support</a>
+<a href="download.html" class="btn btn-sm">Download</a>
+</div>
+</nav>
+</header>
+
+<main id="main">
+
+<section class="hero split align-center">
+<div class="stack gap-24">
+<p class="eyebrow eyebrow-lg">CIRCUITS · ELECTRONICS · SIGNALS · PHYSICS · MATH</p>
+<h1 class="display">Learn electricity the way engineers work.</h1>
+<p class="lead">A deep, free learning tool for circuits, electronics, and the physics and math behind them. Every topic is a node on one tree. You light it by proving you understand it, then keep it lit.</p>
+<div class="btn-row">
+<a href="#" class="btn">Open in browser</a>
+<a href="download.html" class="btn btn-secondary">Download for Linux</a>
+</div>
+<p class="fine">Free. No account. Your progress stays on your device.</p>
+</div>
+
+<figure class="figure">
+<svg viewBox="0 0 600 600" class="tree-art" role="img" aria-label="A radial knowledge tree: the center and inner topics are lit, the next ring is ready to learn, the outer rings are still dark.">
+<circle cx="300" cy="300" r="70" fill="none" stroke="#1E2220"/>
+<circle cx="300" cy="300" r="130" fill="none" stroke="#1E2220"/>
+<circle cx="300" cy="300" r="190" fill="none" stroke="#1E2220"/>
+<circle cx="300" cy="300" r="250" fill="none" stroke="#1E2220" stroke-dasharray="2 6"/>
+<g stroke="#2C312D" stroke-width="1.5" fill="none">
+<path d="M300 170 L276.8 111.4 L269.5 51.9 M300 170 L323.2 111.4 L330.5 51.9"/>
+<path d="M401.6 218.9 L461.9 200.5 L513 169.1 M433 164.3 L475 121.5"/>
+<path d="M426.7 328.9 L489 319.4 L548.7 325.5 M426.7 328.9 L478.7 364.5 L535.1 384.9"/>
+<path d="M330.4 363.1 L356.4 417.1 L402.7 459.9 L435.1 510.3 M356.4 417.1 L361 480 L380.2 536.8"/>
+<path d="M269.6 363.1 L243.6 417.1 L239 480 L219.8 536.8 M243.6 417.1 L197.3 459.9 L164.9 510.3"/>
+<path d="M173.3 328.9 L121.3 364.5 L64.9 384.9 M173.3 328.9 L111 319.4 L51.3 325.5"/>
+<path d="M198.4 218.9 L138.1 200.5 L87 169.1 M198.4 218.9 L167 164.3 L125 121.5"/>
+</g>
+<g stroke="#E8A33D" stroke-width="2.2" fill="none" stroke-linecap="round">
+<path d="M300 300 L300 230 L300 170"/>
+<path d="M300 300 L354.7 256.4 L401.6 218.9 L433 164.3"/>
+<path d="M300 300 L368.2 315.6 L426.7 328.9"/>
+<path d="M300 300 L330.4 363.1"/>
+<path d="M300 300 L269.6 363.1"/>
+<path d="M300 300 L231.8 315.6 L173.3 328.9"/>
+<path d="M300 300 L245.3 256.4 L198.4 218.9"/>
+</g>
+<g fill="#0D0F0E" stroke="#3A3F3B" stroke-width="1.5">
+<circle cx="269.5" cy="51.9" r="6"/><circle cx="330.5" cy="51.9" r="6"/><circle cx="323.2" cy="111.4" r="7"/>
+<circle cx="461.9" cy="200.5" r="7"/><circle cx="475" cy="121.5" r="6"/><circle cx="513" cy="169.1" r="6"/>
+<circle cx="478.7" cy="364.5" r="7"/><circle cx="548.7" cy="325.5" r="6"/><circle cx="535.1" cy="384.9" r="6"/>
+<circle cx="402.7" cy="459.9" r="7"/><circle cx="361" cy="480" r="7"/><circle cx="435.1" cy="510.3" r="6"/><circle cx="380.2" cy="536.8" r="6"/>
+<circle cx="239" cy="480" r="7"/><circle cx="197.3" cy="459.9" r="7"/><circle cx="219.8" cy="536.8" r="6"/><circle cx="164.9" cy="510.3" r="6"/>
+<circle cx="121.3" cy="364.5" r="7"/><circle cx="111" cy="319.4" r="7"/><circle cx="64.9" cy="384.9" r="6"/><circle cx="51.3" cy="325.5" r="6"/>
+<circle cx="138.1" cy="200.5" r="7"/><circle cx="167" cy="164.3" r="7"/><circle cx="87" cy="169.1" r="6"/><circle cx="125" cy="121.5" r="6"/>
+</g>
+<g fill="#1A1D1B" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="3 3">
+<circle cx="276.8" cy="111.4" r="8"/><circle cx="489" cy="319.4" r="8"/><circle cx="356.4" cy="417.1" r="8"/><circle cx="243.6" cy="417.1" r="8"/>
+</g>
+<g fill="#E8A33D">
+<circle cx="300" cy="230" r="8"/><circle cx="354.7" cy="256.4" r="8"/><circle cx="368.2" cy="315.6" r="8"/><circle cx="330.4" cy="363.1" r="8"/><circle cx="269.6" cy="363.1" r="8"/><circle cx="231.8" cy="315.6" r="8"/><circle cx="245.3" cy="256.4" r="8"/>
+<circle cx="300" cy="170" r="9"/><circle cx="401.6" cy="218.9" r="9"/><circle cx="426.7" cy="328.9" r="9"/><circle cx="173.3" cy="328.9" r="9"/><circle cx="198.4" cy="218.9" r="9"/>
+<circle cx="433" cy="164.3" r="8"/>
+</g>
+<circle cx="300" cy="300" r="15" fill="#E8A33D"/>
+<circle cx="300" cy="300" r="22" fill="none" stroke="#E8A33D" stroke-opacity="0.45"/>
+</svg>
+<figcaption class="caption">Center: charge, voltage, current. Outward: everything built on them.</figcaption>
+</figure>
+</section>
+
+<section id="tree" class="band band-alt">
+<div class="container stack gap-32">
+<div class="section-intro">
+<p class="eyebrow">01 · THE TREE</p>
+<h2 class="title-lg">One tree for all of electricity.</h2>
+<p class="text">Topics build from charge, voltage and current into circuit analysis and electronics. Every line between two nodes is a real prerequisite, so you always know why something is locked and what it leads to.</p>
+</div>
+<div class="cards">
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#0D0F0E" stroke="#3A3F3B" stroke-width="1.5"/></svg><strong>Dark</strong></div>
+<p class="note">Not reachable yet. You can see it, and how far the subject goes.</p>
+</div>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#1A1D1B" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="3 3"/></svg><strong>Ready</strong></div>
+<p class="note">Ready to learn. Every prerequisite is already lit.</p>
+</div>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D"/></svg><strong>Lit</strong></div>
+<p class="note">Mastered: five right in a row without hints, each one harder than the last.</p>
+</div>
+<div class="legend-card">
+<div class="legend-title"><svg width="18" height="18" aria-hidden="true"><circle cx="9" cy="9" r="7" fill="#E8A33D" fill-opacity="0.4" stroke="#E8A33D" stroke-width="1.5"/></svg><strong>Review due</strong></div>
+<p class="note">Lit topics come back for review after 1, 3, 7, 14 and 30 days. Miss twice in a row and it has to be lit again.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="work" class="band">
+<div class="container split align-start">
+<div class="stack gap-16">
+<p class="eyebrow">02 · REAL WORK</p>
+<h2 class="title-lg">Design to spec, with real parts. The way professionals do it.</h2>
+<p class="text">Design problems give you a requirement and a standard series to choose from. Any standard-value design that meets the spec is accepted. Some designs run in the simulator, so real effects like op-amp bandwidth or a true diode drop decide whether yours works.</p>
+<ul class="list gap-6">
+<li>Values from the E12 and E24 series</li>
+<li>Worst-case answers from part tolerances</li>
+<li>Datasheet limits: absolute maximum and operating ratings</li>
+<li>Designs checked in the simulator</li>
+<li>The Bench: wire a circuit, predict a reading, then probe it with a multimeter</li>
+<li>Netlists you can copy into LTspice</li>
+</ul>
+<p class="note">Nothing explodes. A design that only works on paper gets feedback naming the effect it missed.</p>
+</div>
+
+<div class="stack gap-16 mono">
+<div class="panel">
+<div class="panel-head"><span>DESIGN PROBLEM</span><span>DIVIDERS</span></div>
+<div class="panel-title">Divider from a fixed supply</div>
+<div class="spec">
+<span class="key">Source</span><span>12 V</span>
+<span class="key">Output</span><span>3.0&nbsp;V, within 5%</span>
+<span class="key">Parts</span><span>R1, R2 from E24, 1&nbsp;kΩ to 100&nbsp;kΩ</span>
+<span class="key">Answer</span><span>R1&nbsp;30&nbsp;kΩ · R2&nbsp;10&nbsp;kΩ</span>
+<span class="key">Result</span><span>3.00&nbsp;V · accepted</span>
+</div>
+</div>
+<div class="panel">
+<div class="panel-head"><span>WORST CASE</span><span>REAL COMPONENTS</span></div>
+<div class="spec">
+<span class="key">Circuit</span><span>12&nbsp;V · R1&nbsp;3.9&nbsp;kΩ · R2&nbsp;1.2&nbsp;kΩ, ±5%</span>
+<span class="key">Nominal</span><span>2.82&nbsp;V</span>
+<span class="key">Highest</span><span>3.05&nbsp;V (R2&nbsp;+5%, R1&nbsp;−5%)</span>
+<span class="key">Lowest</span><span>2.61&nbsp;V (R2&nbsp;−5%, R1&nbsp;+5%)</span>
+</div>
+<div class="verdict">
+<span class="tag-fail">+7.9%</span>
+<span class="verdict-text">Both errors push the ratio the same way, so the output moves by more than 5%.</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="correct" class="band band-alt">
+<div class="container stack gap-32">
+<div class="section-intro">
+<p class="eyebrow">03 · CORRECTNESS</p>
+<h2 class="title-lg">Correct, or it doesn't ship.</h2>
+<p class="text">A wrong answer costs more trust than a missing topic. Problems go through these checks before they reach you.</p>
+</div>
+<div class="cards">
+<div class="check"><strong>Computed</strong><span class="note">Answers come from formulas, never typed in by hand.</span></div>
+<div class="check"><strong>Tested</strong><span class="note">Each problem type is checked against a hand-worked value.</span></div>
+<div class="check"><strong>Cross-checked</strong><span class="note">Selected circuit problems are re-derived independently by the built-in simulator.</span></div>
+<div class="check"><strong>Reviewed</strong><span class="note">Content is verified and reviewed against cited sources.</span></div>
+</div>
+<p class="note">Found a mistake anyway? Every problem has a Report a problem button. Reports are read and fixed.</p>
+</div>
+</section>
+
+<section class="band">
+<div class="container stack gap-24">
+<p class="eyebrow">04 · WHAT'S IN IT</p>
+<h2 class="title-lg">From charge to particle physics.</h2>
+<div class="chips">
+<span class="chip chip-on">Circuits</span>
+<span class="chip chip-on">Electronics</span>
+<span class="chip">Digital logic</span>
+<span class="chip">Signal processing</span>
+<span class="chip">Math</span>
+<span class="chip">Physics</span>
+<span class="chip">Particle physics</span>
+</div>
+<p class="text">In Early Access now: circuits and electronics, 50 topics from charge and current through op amps, diodes, transistors and MOSFETs, plus reading schematics and SPICE. The other subjects are planned, and each will be written, checked and reviewed before it ships.</p>
+</div>
+</section>
+
+<section id="support" class="band band-alt">
+<div class="container split gap-40 align-center">
+<div class="stack gap-14">
+<p class="eyebrow">05 · FREE</p>
+<h2 class="title-lg">Learning is free. Forever.</h2>
+<p class="text">Every topic, problem and tool is free. No ads, no paid learning, no selling your data. Spark Chamber is supported by people who find it useful.</p>
+</div>
+<div class="actions">
+<a href="#" class="btn">Support Spark Chamber</a>
+<span class="fine">Optional, on Ko-fi: [KO-FI LINK]. Support is not tax-deductible.</span>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+<div class="footer-inner">
+<span>Spark Chamber · Early Access 0.2.0</span>
+<div class="footer-links">
+<a href="download.html">Download</a>
+<a href="privacy.html">Privacy</a>
+<a href="credits.html">Credits</a>
+<a href="safety.html">Safety</a>
+<a href="https://github.com/spark-chamber/spark-chamber-feedback/issues/new/choose">Report a problem</a>
+</div>
+</div>
+</footer>
+
+</body>
+</html>
