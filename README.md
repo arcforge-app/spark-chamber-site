@@ -1,6 +1,6 @@
 # Spark Chamber website
 
-Static site for Spark Chamber (plain HTML and CSS, no build step). Hosted on GitHub Pages.
+Static site for Spark Chamber (plain HTML and CSS, no build step). Hosted on GitHub Pages at https://sparkchamber.app (the `CNAME` file sets the domain).
 
 - `index.html`: home page
 - `download.html`: downloads and release notes
