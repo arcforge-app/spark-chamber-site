@@ -1,0 +1,11 @@
+name = "spark-chamber-feedback"
+main = "src/worker.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+SITE_URL = "https://sparkchamber.app"
+GITHUB_REPO = "spark-chamber/spark-chamber-feedback"
+
+# Secrets (set with `npx wrangler secret put NAME`, never committed):
+#   TURNSTILE_SECRET  the Turnstile widget's secret key
+#   GITHUB_TOKEN      a fine-grained token with Issues: read and write on the feedback repo only

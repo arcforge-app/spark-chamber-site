@@ -1,0 +1,6 @@
+# GitHub Pages settings. The site is plain HTML; these files are notes for the repo only.
+exclude:
+  - README.md
+  - TODO.md
+  - STYLE.md
+  - feedback-worker

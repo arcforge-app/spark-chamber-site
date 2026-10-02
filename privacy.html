@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy · Spark Chamber</title>
 <meta name="description" content="Spark Chamber collects nothing. Your progress is stored only on your device.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spark Chamber">
+<meta property="og:title" content="Privacy · Spark Chamber">
+<meta property="og:description" content="Spark Chamber collects nothing. Your progress is stored only on your device.">
+<meta property="og:url" content="https://sparkchamber.app/privacy.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
 <link rel="stylesheet" href="style.css">
@@ -29,9 +35,9 @@
 <main id="main">
 
 <section class="page-intro stack gap-14">
-<p class="eyebrow">PRIVACY · LAST UPDATED 2026-10-02</p>
-<h1 class="display-sm">Your progress stays on your device.</h1>
-<p class="lead lead-wide">Spark Chamber collects nothing. It has no account, makes no network requests, and contains no analytics, advertising or tracking.</p>
+<p class="eyebrow">PRIVACY · LAST UPDATED OCTOBER 2, 2026</p>
+<h1 class="display-sm">Your progress stays on your device</h1>
+<p class="lead lead-wide">The Spark Chamber app collects nothing. It has no account, makes no network requests, and contains no analytics, advertising, or tracking.</p>
 </section>
 
 <div class="page-body">
@@ -39,37 +45,44 @@
 
 <section>
 <h2 class="title-md">What stays on your device</h2>
-<p class="text">Your progress, settings and any problem reports you save are kept in the app's own storage on your device. Nothing is uploaded, and there is no copy anywhere else.</p>
+<p class="text">Your progress, settings, and any problem reports you save stay in the app's own storage on your device. Nothing is uploaded, and no copy exists anywhere else.</p>
 <ul class="list">
-<li>Linux: in the app's data folder in your home directory (under <code>~/snap/spark-chamber/</code> for the Snap version).</li>
-<li>Browser: your browser's storage for this site. Clearing the site's data removes it.</li>
-<li>Settings → Reset progress, or uninstalling the app, removes it.</li>
+<li>In the Snap version, it's in <code>~/snap/spark-chamber/common/</code>, a folder that every update shares, so updates can't erase it.</li>
+<li>The app also keeps automatic backups of recent saves in the same folder.</li>
+<li>In a browser, it's in the browser's storage for this site. Clearing the site's data removes it.</li>
+<li>Settings → Reset progress clears it. Uninstalling the Snap removes it too, though your system keeps a snapshot for 31 days unless you uninstall with <code>snap remove --purge</code>.</li>
 </ul>
 </section>
 
 <section>
-<h2 class="title-md">What leaves your device, only when you choose</h2>
-<p class="text">Settings → Copy progress backup and Report a problem copy text to your clipboard. It goes wherever you paste it, and nowhere else. The app itself never sends anything.</p>
+<h2 class="title-md">What leaves your device</h2>
+<p class="text">Only what you choose to share leaves your device. Export progress… (in Settings) writes your progress to a file you pick, and Report a problem copies text to your clipboard. Each goes only where you save or paste it. The app itself never sends anything.</p>
 </section>
 
 <section>
 <h2 class="title-md">App stores</h2>
-<p class="text">The store you install from (for example the Snap Store, run by Canonical) records installs and updates under its own privacy notice. Spark Chamber receives only the store's aggregate statistics, such as install counts by country, never anything that identifies you.</p>
+<p class="text">The store you install from (for example the Snap Store, run by Canonical) records installs and updates under its own privacy notice. Spark Chamber receives only the store's aggregate statistics, such as install counts by country. It never receives anything that identifies you.</p>
 </section>
 
 <section>
 <h2 class="title-md">This website</h2>
-<p class="text">This site has no cookies, analytics or tracking. It is hosted on GitHub Pages and loads its fonts from Google Fonts. Like any web server, they receive your IP address and browser details when you open a page, under their own policies: the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
+<p class="text">Apart from the spam check on the feedback page, this site has no cookies, analytics, or tracking. It's hosted on GitHub Pages and loads its fonts from Google Fonts. As with any web host, GitHub and Google see your IP address and browser details when you open a page. Their own policies apply: the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
+</section>
+
+<section>
+<h2 class="title-md">Feedback you send</h2>
+<p class="text">When you send the <a href="feedback.html">feedback form</a>, we store your message, the problem details, and your email address if you give one. They go to a private GitHub repository that only the Spark Chamber team can read. We don't store your IP address, and we use your email address only to reply to you. To have a report deleted, say so in a new report and include the email address you used.</p>
+<p class="text">The form uses Cloudflare Turnstile to block spam, and a Cloudflare Worker passes your report to GitHub. Cloudflare processes these requests under the <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a>.</p>
 </section>
 
 <section>
 <h2 class="title-md">Children</h2>
-<p class="text">Spark Chamber is meant for students, including minors. Because it collects nothing, it has no data about anyone to disclose, sell or delete.</p>
+<p class="text">Spark Chamber is meant for students, including minors. The app collects nothing, and the only data we keep is the feedback people choose to send. Younger students shouldn't include their email address.</p>
 </section>
 
 <section>
 <h2 class="title-md">Questions</h2>
-<p class="text">Ask in the <a href="https://github.com/spark-chamber/spark-chamber-feedback/issues">public feedback tracker</a> (a free GitHub account is needed). The app's About page says the same as this page; if they ever differ, the app is the authority and this page will be corrected.</p>
+<p class="text">Send them through the <a href="feedback.html">feedback form</a>. The app's About page says the same as this page. If they ever differ, the app is right and this page will be corrected.</p>
 </section>
 
 </div>
@@ -79,14 +92,14 @@
 
 <footer class="site-footer">
 <div class="footer-inner">
-<span>Spark Chamber · Early Access 0.2.0</span>
+<span>Spark Chamber · Early Access 0.3.0</span>
 <div class="footer-links">
 <a href="index.html">Home</a>
 <a href="download.html">Download</a>
 <a href="privacy.html" aria-current="page">Privacy</a>
 <a href="credits.html">Credits</a>
 <a href="safety.html">Safety</a>
-<a href="https://github.com/spark-chamber/spark-chamber-feedback/issues/new/choose">Report a problem</a>
+<a href="feedback.html">Report a problem</a>
 </div>
 </div>
 </footer>
