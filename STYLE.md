@@ -25,7 +25,7 @@ The site follows the main technical-writing style guides: the Google developer d
 - Use the serial (Oxford) comma: "charge, voltage, and current".
 - Put "only" next to the word it limits ("works only on paper", not "only works on paper").
 - In a list, every item has the same grammatical form. Either all items are full sentences ending in periods, or all are short phrases with no end punctuation. Don't mix the two.
-- Use an arrow for menu paths: Settings → Copy progress backup.
+- Use an arrow for menu paths: Settings → Export progress….
 
 ## Numbers and units
 
@@ -36,7 +36,7 @@ The site follows the main technical-writing style guides: the Google developer d
 ## Terms
 
 - "Spark Chamber" (two words, both capitalized). "Early Access" is capitalized.
-- Use the app's names for things exactly: the Bench, the Workshop, Report a problem, Copy progress backup.
+- Use the app's names for things exactly: the Bench, the Workshop, Report a problem, Export progress…, Import progress….
 - Topic states: Dark, Ready, Lit, Review due.
 
 ## Sources

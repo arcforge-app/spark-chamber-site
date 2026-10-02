@@ -47,15 +47,16 @@
 <h2 class="title-md">What stays on your device</h2>
 <p class="text">Your progress, settings, and any problem reports you save stay in the app's own storage on your device. Nothing is uploaded, and no copy exists anywhere else.</p>
 <ul class="list">
-<li>On Linux, it's in the app's data folder in your home directory, or inside <code>~/snap/spark-chamber/</code> for the Snap version.</li>
+<li>In the Snap version, it's in <code>~/snap/spark-chamber/common/</code>, a folder that every update shares, so updates can't erase it.</li>
+<li>The app also keeps automatic backups of recent saves in the same folder.</li>
 <li>In a browser, it's in the browser's storage for this site. Clearing the site's data removes it.</li>
-<li>Settings → Reset progress deletes it, and so does uninstalling the app.</li>
+<li>Settings → Reset progress clears it. Uninstalling the Snap removes it too, though your system keeps a snapshot for 31 days unless you uninstall with <code>snap remove --purge</code>.</li>
 </ul>
 </section>
 
 <section>
 <h2 class="title-md">What leaves your device</h2>
-<p class="text">Only what you choose to share leaves your device. Copy progress backup (in Settings) and Report a problem copy text to your clipboard, and it goes only where you paste it. The app itself never sends anything.</p>
+<p class="text">Only what you choose to share leaves your device. Export progress… (in Settings) writes your progress to a file you pick, and Report a problem copies text to your clipboard. Each goes only where you save or paste it. The app itself never sends anything.</p>
 </section>
 
 <section>
@@ -91,7 +92,7 @@
 
 <footer class="site-footer">
 <div class="footer-inner">
-<span>Spark Chamber · Early Access 0.2.0</span>
+<span>Spark Chamber · Early Access 0.3.0</span>
 <div class="footer-links">
 <a href="index.html">Home</a>
 <a href="download.html">Download</a>

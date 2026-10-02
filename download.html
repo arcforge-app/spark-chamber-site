@@ -36,9 +36,9 @@
 <main id="main">
 
 <section class="page-intro stack gap-14">
-<p class="eyebrow">DOWNLOAD · EARLY ACCESS 0.2.0 · OCTOBER 2, 2026</p>
+<p class="eyebrow">DOWNLOAD · EARLY ACCESS 0.3.0 · OCTOBER 2, 2026</p>
 <h1 class="display-sm">Get Spark Chamber</h1>
-<p class="lead lead-wide">Spark Chamber is free during Early Access and needs no account. It saves your progress on your device, and you can back it up at any time from Settings → Copy progress backup.</p>
+<p class="lead lead-wide">Spark Chamber is free during Early Access and needs no account. It saves your progress on your device, keeps automatic backups, and lets you export it to a file at any time from Settings → Export progress….</p>
 </section>
 
 <section aria-label="Platforms" class="platforms">
@@ -82,7 +82,7 @@
 <h2 class="title-md">Before you start</h2>
 <ul class="list gap-8">
 <li>This is Early Access, so expect rough edges. More topics are on the way.</li>
-<li>Updates keep your progress, but it's still worth copying a backup from Settings now and then.</li>
+<li>Updates keep your progress, and the app keeps automatic backups. To move your progress to another computer, use Settings → Export progress… and Import progress….</li>
 <li>Found a wrong answer or a bug? Use the Report a problem button in the app.</li>
 <li>Hands-on builds use only battery or USB power, at 12&nbsp;V or less. Read the <a href="safety.html">safety notes</a> before you build.</li>
 </ul>
@@ -94,17 +94,17 @@
 <div class="container-sm stack gap-14">
 <h2 class="title-md">Release notes</h2>
 <div class="panel">
-<div class="panel-head wrap mono"><span>0.2.0</span><span>October 2, 2026</span></div>
+<div class="panel-head wrap mono"><span>0.3.0</span><span>October 2, 2026</span></div>
 <ul class="list gap-6">
-<li>Every problem in the eight core topics (134 in all) was solved again independently to check it.</li>
-<li>The Bench, in the Workshop, lets you place and wire parts, predict a reading, and then check it with a multimeter. When you drag a part's value, the reading updates live.</li>
-<li>The new worksheet calculator (Ctrl+K) handles units, complex numbers, and E-series rounding.</li>
-<li>The new Ohm's law wheel finds V, I, R, or P from any two of them.</li>
-<li>The new Terms page collects 64 technical terms, each with short drills.</li>
-<li>Mastering a topic now takes five correct answers in a row, each harder than the last.</li>
-<li>The simulator now uses adaptive time steps, so the Schmitt trigger no longer switches falsely. It also adds a guided flyback lab.</li>
+<li>Mastered topics now light up in their subject's color, and the links between them light up too.</li>
+<li>Your progress survives updates. The app keeps rotating backups, restores a damaged save from the newest good copy, and adds Export progress… and Import progress… to Settings.</li>
+<li>The Bench has a function generator, a two-channel oscilloscope, and a Bode plotter, and you predict the result before each run.</li>
+<li>Keyboard shortcuts on the Bench place parts, draw wires, and pick instruments.</li>
+<li>After a fault-finding problem, the Bench can hide a fault for you to find with the meter, in that circuit or your own.</li>
+<li>The simulator reads SPICE models for diodes, bipolar transistors, and MOSFETs, checked against ngspice.</li>
+<li>Hints no longer give the answer away, and every topic can now be mastered.</li>
 </ul>
-<p class="fine">Known limit: the Bench has only a multimeter for now.</p>
+<p class="fine">Known limits: the Bench keeps its circuit only until you close the app. A redesigned main screen and final tests for each topic are next.</p>
 </div>
 </div>
 </section>
@@ -113,7 +113,7 @@
 
 <footer class="site-footer">
 <div class="footer-inner">
-<span>Spark Chamber · Early Access 0.2.0</span>
+<span>Spark Chamber · Early Access 0.3.0</span>
 <div class="footer-links">
 <a href="index.html">Home</a>
 <a href="privacy.html">Privacy</a>
