@@ -9,4 +9,4 @@ Static site for Spark Chamber (plain HTML and CSS, no build step). Hosted on Git
 
 Bracketed text such as [VERSION] or [KO-FI LINK] is a placeholder to fill in, and links shown as `#` are placeholders too. `TODO.md` lists every one, along with copy that still needs checking against the app.
 
-When you change `style.css`, bump the `?v=` tag in every page's stylesheet link (for example `style.css?v=0.3.0-2`) so browsers load the new version instead of a cached one.
+When you change `style.css`, bump the `?v=` tag in every page's stylesheet link (for example `style.css?v=0.3.0-3`) so browsers load the new version instead of a cached one.
