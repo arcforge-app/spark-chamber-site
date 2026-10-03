@@ -384,6 +384,8 @@ a:hover { color: var(--accent-hover); }
 .kind-tile:has(input:checked) .kind-name { color: var(--accent); }
 .kind-tile:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 600px) {
+  /* Scales with the screen so a long word like "electromagnetism" fits at 320 px */
+  .display { font-size: clamp(30px, 10vw, 38px); }
   .kind-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .kind-desc { display: none; }
   .kind-tile { padding: 12px; justify-content: center; min-height: 48px; }
