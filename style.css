@@ -305,11 +305,6 @@ h1, h2 { overflow-wrap: break-word; hyphens: auto; }
 .how-steps li::before { content: counter(how); font-family: var(--mono); font-size: 14px; color: var(--accent); }
 .how-steps strong { color: var(--text); }
 
-/* Screenshots from the app, with a caption */
-.shot { margin: 0; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line-2); border-radius: 6px; background: #0B1424; }
-.shot figcaption { font-size: 14px; color: var(--muted); }
-
 /* Text pages: privacy, safety, credits */
 
 .page-body { max-width: 1160px; margin: 0 auto; padding: 24px 24px 72px; }

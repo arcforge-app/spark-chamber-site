@@ -34,3 +34,12 @@ The site's copy was checked against `spark-chamber/electronics-app` at release 0
 - Self-host the IBM Plex fonts (SIL OFL) so the site makes no third-party requests. Then update the "This website" paragraph on `privacy.html`.
 - Buttons and nav links have no hover state. In the original, the inline styles overrode the `a:hover` rule, and that behavior is kept as-is.
 - Bump the "Last updated" date on `privacy.html` whenever it changes.
+
+## For 0.5: app screenshots
+
+The 0.4.1 screenshots were taken out before release: they rendered poorly, and they show the old navy look. The Filament look arrives in 0.5. Retake them then, to this spec (owner, 2026-10-03):
+
+- Crisp 2x captures, each cropped to one focused part of the screen, not a whole window shrunk down.
+- Shown at width 100% and height auto inside the content column. Never cropped with object-fit, and never wider than the column.
+- A 1 px border in the site's line color, an 8 px radius, a subtle shadow, and a one-line caption under each.
+- Side by side only at 900 px and wider; stacked on phones.
