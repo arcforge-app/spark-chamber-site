@@ -1,0 +1,59 @@
+# Checks once a day that the feedback form can still file reports, by asking
+# the feedback Worker's /health (can its GitHub token still reach the feedback
+# repo?). A failure opens one issue here, titled "Feedback form health check
+# failed"; later failures comment on it, and the next pass closes it.
+# See feedback-worker/README.md, "Daily health check".
+name: Feedback form health check
+
+on:
+  schedule:
+    # 11:17 UTC: 6:17 a.m. Central in summer (CDT), 5:17 a.m. in winter (CST).
+    - cron: '17 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ask the feedback Worker for its health
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          HEALTH_URL: https://spark-chamber-feedback.sparkchamber.workers.dev/health
+          TITLE: Feedback form health check failed
+        run: |
+          set -u
+          now=$(date -u '+%Y-%m-%d %H:%M UTC')
+          rm -f body.txt
+          code=$(curl -sS --max-time 20 -o body.txt -w '%{http_code}' "$HEALTH_URL") || code=000
+          reply=$(head -c 300 body.txt 2>/dev/null | tr -d '`\r' | tr '\n' ' ' || true)
+          open=$(gh issue list --state open --limit 100 --json number,title \
+            --jq ".[] | select(.title == \"$TITLE\") | .number" | head -n1)
+
+          if [ "$code" = 200 ]; then
+            echo "Healthy at $now."
+            if [ -n "$open" ]; then
+              gh issue comment "$open" --body "Passed at $now (HTTP 200), so this issue is closed."
+              gh issue close "$open"
+            fi
+            exit 0
+          fi
+
+          note="Failed at $now: HTTP $code. Response: \`${reply:-none}\`"
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body "$note"
+          else
+            gh issue create --title "$TITLE" --body "$note
+
+          What it usually means:
+          - **503 with \`\"github\": 401, 403 or 404\`**: the Worker's GitHub token expired or can't reach \`spark-chamber/spark-chamber-feedback\`. Make a new one (feedback-worker/README.md, \"When the token expires\").
+          - **405 or 404**: the deployed Worker has no \`/health\` yet. Deploy \`feedback-worker/src/worker.js\`.
+          - **000**: the Worker didn't answer within 20 s.
+
+          This issue closes itself after the next passing check (daily at 11:17 UTC, or run the workflow by hand)."
+          fi
+          exit 1

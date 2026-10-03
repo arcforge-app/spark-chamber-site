@@ -33,6 +33,7 @@ const timeout = (env) => AbortSignal.timeout(Number(env.FETCH_TIMEOUT_MS) || FET
 
 export default {
   async fetch(request, env) {
+    if (request.method === 'GET' && new URL(request.url).pathname === '/health') return health(env);
     if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
     let form;
     try {
@@ -108,13 +109,7 @@ async function fileIssue(report, env) {
   const post = (payload) =>
     fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/issues`, {
       method: 'POST',
-      headers: {
-        authorization: `Bearer ${env.GITHUB_TOKEN}`,
-        accept: 'application/vnd.github+json',
-        'content-type': 'application/json',
-        'user-agent': 'spark-chamber-feedback-worker',
-        'x-github-api-version': '2022-11-28',
-      },
+      headers: { ...githubHeaders(env), 'content-type': 'application/json' },
       body: JSON.stringify(payload),
       signal,
     });
@@ -127,6 +122,38 @@ async function fileIssue(report, env) {
   } catch (err) {
     console.log('github unreachable', { error: err?.name ?? 'Error' });
     return false;
+  }
+}
+
+function githubHeaders(env) {
+  return {
+    authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    accept: 'application/vnd.github+json',
+    'user-agent': 'spark-chamber-feedback-worker',
+    'x-github-api-version': '2022-11-28',
+  };
+}
+
+// GET /health, for the daily check in .github/workflows/feedback-health.yml:
+// can the token still reach the feedback repo? It touches neither Turnstile
+// nor the issues, and the answer carries only GitHub's status code.
+async function health(env) {
+  const reply = (status, body) =>
+    new Response(JSON.stringify(body), {
+      status,
+      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+    });
+  try {
+    const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}`, {
+      headers: githubHeaders(env),
+      signal: timeout(env),
+    });
+    if (res.ok) return reply(200, { ok: true });
+    await logGithubFailure(res);
+    return reply(503, { ok: false, github: res.status });
+  } catch (err) {
+    console.log('github unreachable', { error: err?.name ?? 'Error' });
+    return reply(503, { ok: false, github: 'unreachable' });
   }
 }
 

@@ -30,3 +30,22 @@ Tests: `npm test` (Node 22 or later; no install needed).
 ## When the token expires
 
 Create a new token as in step 3, then run `npx wrangler secret put GITHUB_TOKEN` again. Until you do, the form shows "Your report couldn't be saved just now".
+
+## Daily health check
+
+`GET /health` on the Worker checks that the GitHub token can still reach the feedback repo. It reads the repo's basic details only: no Turnstile check, nothing filed, and no report data. It answers `200 {"ok":true}`, or `503 {"ok":false,"github":401}` with GitHub's status code (or `"unreachable"` if GitHub didn't answer within 8 s). Any other path still answers 405 to a GET.
+
+The workflow `.github/workflows/feedback-health.yml` in this repo calls it every day at 11:17 UTC (6:17 a.m. Central in summer, 5:17 a.m. in winter). It needs no secrets: it uses the workflow's own token, with permission to write issues only.
+
+How to read it:
+
+- **Nothing to do** while checks pass. Each run is listed under the repo's **Actions** tab, with a green check mark.
+- **On a failure**, the run turns red (GitHub emails the repo's admins), and an issue titled **"Feedback form health check failed"** opens in this repo with the HTTP status and the time. Later failures add a comment to the same issue, and the next passing check closes it.
+- **503 with `"github": 401`, 403 or 404**: the token expired or can't reach the feedback repo. See "When the token expires" above.
+- **405 or 404**: the deployed Worker is older than `/health`. Deploy `src/worker.js` again.
+- **000**: the Worker didn't answer within 20 s.
+- To check right away, open **Actions → Feedback form health check → Run workflow**.
+
+`/health` exists only once this version of `src/worker.js` is deployed (`npx wrangler deploy`, or paste it into the dashboard's **Edit code** and click **Deploy**). Until then, every check fails with 405.
+
+GitHub pauses scheduled workflows in a public repo after 60 days without any commits, and it emails the repo's admins first. To restart it, open the workflow under **Actions** and click **Enable workflow**.
