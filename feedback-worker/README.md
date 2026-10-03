@@ -31,11 +31,11 @@ Tests: `npm test` (Node 22 or later; no install needed).
 
 Create a new token as in step 3, then run `npx wrangler secret put GITHUB_TOKEN` again. Until you do, the form shows "Your report couldn't be saved just now".
 
-## Daily health check
+## Weekly health check
 
 `GET /health` on the Worker checks that the GitHub token can still reach the feedback repo. It reads the repo's basic details only: no Turnstile check, nothing filed, and no report data. It answers `200 {"ok":true}`, or `503 {"ok":false,"github":401}` with GitHub's status code (or `"unreachable"` if GitHub didn't answer within 8 s). Any other path still answers 405 to a GET. Because `/health` is public and each real check spends one GitHub API call on the feedback token, the Worker reuses its last answer, good or bad, for 5 minutes, so repeated hits can't drain the token's rate limit.
 
-The workflow `.github/workflows/feedback-health.yml` in this repo calls it every day at 11:17 UTC (6:17 a.m. Central in summer, 5:17 a.m. in winter). It needs no secrets: it uses the workflow's own token, with permission to write issues only.
+The workflow `.github/workflows/feedback-health.yml` in this repo calls it every Monday at 11:17 UTC (6:17 a.m. Central in summer, 5:17 a.m. in winter), the same day as the weekly feedback summary. It needs no secrets: it uses the workflow's own token, with permission to write issues only.
 
 How to read it:
 

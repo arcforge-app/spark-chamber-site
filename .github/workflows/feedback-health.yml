@@ -1,14 +1,15 @@
-# Checks once a day that the feedback form can still file reports, by asking
+# Checks once a week (Monday mornings) that the feedback form can still file reports, by asking
 # the feedback Worker's /health (can its GitHub token still reach the feedback
 # repo?). A failure opens one issue here, titled "Feedback form health check
 # failed"; later failures comment on it, and the next pass closes it.
-# See feedback-worker/README.md, "Daily health check".
+# See feedback-worker/README.md, "Weekly health check".
 name: Feedback form health check
 
 on:
   schedule:
-    # 11:17 UTC: 6:17 a.m. Central in summer (CDT), 5:17 a.m. in winter (CST).
-    - cron: '17 11 * * *'
+    # Mondays at 11:17 UTC: 6:17 a.m. Central in summer (CDT), 5:17 a.m. in
+    # winter (CST); the same day as the weekly feedback summary.
+    - cron: '17 11 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -54,6 +55,6 @@ jobs:
           - **405 or 404**: the deployed Worker has no \`/health\` yet. Deploy \`feedback-worker/src/worker.js\`.
           - **000**: the Worker didn't answer within 20 s.
 
-          This issue closes itself after the next passing check (daily at 11:17 UTC, or run the workflow by hand)."
+          This issue closes itself after the next passing check (weekly on Mondays at 11:17 UTC, or run the workflow by hand)."
           fi
           exit 1

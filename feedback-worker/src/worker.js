@@ -134,7 +134,7 @@ function githubHeaders(env) {
   };
 }
 
-// GET /health, for the daily check in .github/workflows/feedback-health.yml:
+// GET /health, for the weekly check in .github/workflows/feedback-health.yml:
 // can the token still reach the feedback repo? It touches neither Turnstile
 // nor the issues, and the answer carries only GitHub's status code.
 //
