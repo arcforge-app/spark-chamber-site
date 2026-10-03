@@ -1,7 +1,7 @@
 // Receives the feedback form on sparkchamber.app and files each report as an
 // issue in the private feedback repository. Nothing else is stored: no IP
 // address, no cookies. Secrets: TURNSTILE_SECRET, GITHUB_TOKEN.
-// Vars: SITE_URL, GITHUB_REPO (owner/name).
+// Vars: SITE_URL, GITHUB_REPO (owner/name); optional FETCH_TIMEOUT_MS.
 
 export const KINDS = {
   'wrong-answer': 'The expected answer looks wrong',
@@ -24,6 +24,12 @@ const DETAILS = {
 };
 
 const LIMITS = { message: 5000, email: 200, detail: 200 };
+
+// How long to wait for Turnstile, and for GitHub, before giving up. Without a
+// limit, a stalled call keeps the visitor's browser loading forever; with it,
+// they land back on the form with a message (status=check or status=error).
+const FETCH_TIMEOUT_MS = 8000;
+const timeout = (env) => AbortSignal.timeout(Number(env.FETCH_TIMEOUT_MS) || FETCH_TIMEOUT_MS);
 
 export default {
   async fetch(request, env) {
@@ -63,7 +69,11 @@ async function humanCheck(token, env) {
   body.append('secret', env.TURNSTILE_SECRET);
   body.append('response', token);
   try {
-    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body });
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body,
+      signal: timeout(env),
+    });
     const data = await res.json();
     return data.success === true;
   } catch {
@@ -89,6 +99,8 @@ export function issueFor({ kind, message, email, details }) {
 
 async function fileIssue(report, env) {
   const issue = issueFor(report);
+  // One limit for both tries, so a retry can't double the wait.
+  const signal = timeout(env);
   const post = (payload) =>
     fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/issues`, {
       method: 'POST',
@@ -100,6 +112,7 @@ async function fileIssue(report, env) {
         'x-github-api-version': '2022-11-28',
       },
       body: JSON.stringify(payload),
+      signal,
     });
   try {
     let res = await post(issue);
