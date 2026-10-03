@@ -97,3 +97,55 @@ test('visitor text cannot ping people, reference issues or break the table', () 
   assert.match(body, /a \\\| b/);
   assert.deepEqual(labels, ['kind:other', 'from:web']);
 });
+
+// A call that never answers on its own: it settles only when its signal
+// aborts, and without a signal it never settles at all (as a stalled call).
+const hang = (url, init) => {
+  calls.push({ url: String(url), init });
+  return new Promise((_, reject) => init?.signal?.addEventListener('abort', () => reject(init.signal.reason)));
+};
+const quick = { ...env, FETCH_TIMEOUT_MS: '50' };
+// Node's AbortSignal.timeout doesn't keep the process alive (Workers keep the
+// request alive themselves), so hold the test open until the request settles.
+async function postWith(fields, envOverride) {
+  const body = new FormData();
+  for (const [k, v] of Object.entries(fields)) body.append(k, v);
+  const keepAlive = setInterval(() => {}, 1000);
+  try {
+    return await worker.fetch(new Request('https://worker.example/', { method: 'POST', body }), envOverride);
+  } finally {
+    clearInterval(keepAlive);
+  }
+}
+
+test('a stalled human check times out and sends the visitor back to check again', { timeout: 3000 }, async () => {
+  globalThis.fetch = hang;
+  const started = Date.now();
+  const res = await postWith(valid, quick);
+  assert.equal(res.status, 303);
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback.html?status=check');
+  assert.ok(Date.now() - started < 2000);
+  assert.equal(githubCalls().length, 0);
+});
+
+test('a stalled GitHub call times out and shows the error page', { timeout: 3000 }, async () => {
+  globalThis.fetch = async (url, init) => {
+    if (String(url).includes('turnstile')) {
+      calls.push({ url: String(url), init });
+      return Response.json({ success: true });
+    }
+    return hang(url, init);
+  };
+  const started = Date.now();
+  const res = await postWith(valid, quick);
+  assert.equal(res.status, 303);
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback.html?status=error');
+  assert.ok(Date.now() - started < 2000);
+  assert.equal(githubCalls().length, 1);
+});
+
+test('both outside calls carry a time limit', async () => {
+  await post(valid);
+  assert.equal(calls.length, 2);
+  for (const call of calls) assert.ok(call.init.signal instanceof AbortSignal, call.url);
+});
