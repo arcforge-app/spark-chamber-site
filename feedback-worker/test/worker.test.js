@@ -1,7 +1,7 @@
 // Run with: npm test
 import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { issueFor } from '../src/worker.js';
+import worker, { issueFor, resetHealthCache } from '../src/worker.js';
 
 const env = {
   SITE_URL: 'https://sparkchamber.app',
@@ -14,6 +14,7 @@ let calls;
 let turnstileOk;
 let githubStatus;
 beforeEach(() => {
+  resetHealthCache();
   calls = [];
   turnstileOk = true;
   githubStatus = [201];
@@ -244,4 +245,31 @@ test('GET on any other path is still 405', async () => {
   const res = await worker.fetch(new Request('https://worker.example/'), env);
   assert.equal(res.status, 405);
   assert.equal(calls.length, 0);
+});
+
+test('GET /health reuses its answer for 5 minutes, so it calls GitHub once', async () => {
+  const first = await getHealth();
+  const second = await getHealth();
+  assert.equal(first.status, 200);
+  assert.equal(second.status, 200);
+  assert.deepEqual(await second.json(), { ok: true });
+  assert.equal(calls.length, 1);
+});
+
+test('a cached failing /health is reused too, then rechecked after 5 minutes', async (t) => {
+  t.mock.timers.enable({ apis: ['Date'], now: 1_000_000 });
+  globalThis.fetch = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return new Response('{}', { status: calls.length === 1 ? 401 : 200 });
+  };
+  const log = await logsOf(async () => {
+    assert.equal((await getHealth()).status, 503);
+    t.mock.timers.tick(4 * 60 * 1000);
+    assert.equal((await getHealth()).status, 503);
+  });
+  assert.match(log, /401/);
+  assert.equal(calls.length, 1);
+  t.mock.timers.tick(60 * 1000);
+  assert.equal((await getHealth()).status, 200);
+  assert.equal(calls.length, 2);
 });

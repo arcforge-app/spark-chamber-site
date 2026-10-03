@@ -137,23 +137,39 @@ function githubHeaders(env) {
 // GET /health, for the daily check in .github/workflows/feedback-health.yml:
 // can the token still reach the feedback repo? It touches neither Turnstile
 // nor the issues, and the answer carries only GitHub's status code.
+//
+// /health is public and each check spends one GitHub API call on the
+// feedback token, so the answer (good or bad) is reused for 5 minutes in
+// this isolate. Hammering it can't drain the token's rate limit and block
+// real reports.
+const HEALTH_CACHE_MS = 5 * 60 * 1000;
+let lastHealth = null; // { at, status, body }
+export function resetHealthCache() {
+  lastHealth = null;
+}
+
 async function health(env) {
-  const reply = (status, body) =>
-    new Response(JSON.stringify(body), {
-      status,
-      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-    });
+  if (!lastHealth || Date.now() - lastHealth.at >= HEALTH_CACHE_MS) {
+    lastHealth = { at: Date.now(), ...(await checkGithub(env)) };
+  }
+  return new Response(JSON.stringify(lastHealth.body), {
+    status: lastHealth.status,
+    headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+  });
+}
+
+async function checkGithub(env) {
   try {
     const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}`, {
       headers: githubHeaders(env),
       signal: timeout(env),
     });
-    if (res.ok) return reply(200, { ok: true });
+    if (res.ok) return { status: 200, body: { ok: true } };
     await logGithubFailure(res);
-    return reply(503, { ok: false, github: res.status });
+    return { status: 503, body: { ok: false, github: res.status } };
   } catch (err) {
     console.log('github unreachable', { error: err?.name ?? 'Error' });
-    return reply(503, { ok: false, github: 'unreachable' });
+    return { status: 503, body: { ok: false, github: 'unreachable' } };
   }
 }
 
