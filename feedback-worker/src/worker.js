@@ -33,6 +33,7 @@ const timeout = (env) => AbortSignal.timeout(Number(env.FETCH_TIMEOUT_MS) || FET
 
 export default {
   async fetch(request, env) {
+    if (request.method === 'GET' && new URL(request.url).pathname === '/health') return health(env);
     if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
     let form;
     try {
@@ -108,13 +109,7 @@ async function fileIssue(report, env) {
   const post = (payload) =>
     fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/issues`, {
       method: 'POST',
-      headers: {
-        authorization: `Bearer ${env.GITHUB_TOKEN}`,
-        accept: 'application/vnd.github+json',
-        'content-type': 'application/json',
-        'user-agent': 'spark-chamber-feedback-worker',
-        'x-github-api-version': '2022-11-28',
-      },
+      headers: { ...githubHeaders(env), 'content-type': 'application/json' },
       body: JSON.stringify(payload),
       signal,
     });
@@ -127,6 +122,54 @@ async function fileIssue(report, env) {
   } catch (err) {
     console.log('github unreachable', { error: err?.name ?? 'Error' });
     return false;
+  }
+}
+
+function githubHeaders(env) {
+  return {
+    authorization: `Bearer ${env.GITHUB_TOKEN}`,
+    accept: 'application/vnd.github+json',
+    'user-agent': 'spark-chamber-feedback-worker',
+    'x-github-api-version': '2022-11-28',
+  };
+}
+
+// GET /health, for the check every other week in .github/workflows/feedback-health.yml:
+// can the token still reach the feedback repo? It touches neither Turnstile
+// nor the issues, and the answer carries only GitHub's status code.
+//
+// /health is public and each check spends one GitHub API call on the
+// feedback token, so the answer (good or bad) is reused for 5 minutes in
+// this isolate. Hammering it can't drain the token's rate limit and block
+// real reports.
+const HEALTH_CACHE_MS = 5 * 60 * 1000;
+let lastHealth = null; // { at, status, body }
+export function resetHealthCache() {
+  lastHealth = null;
+}
+
+async function health(env) {
+  if (!lastHealth || Date.now() - lastHealth.at >= HEALTH_CACHE_MS) {
+    lastHealth = { at: Date.now(), ...(await checkGithub(env)) };
+  }
+  return new Response(JSON.stringify(lastHealth.body), {
+    status: lastHealth.status,
+    headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+  });
+}
+
+async function checkGithub(env) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}`, {
+      headers: githubHeaders(env),
+      signal: timeout(env),
+    });
+    if (res.ok) return { status: 200, body: { ok: true } };
+    await logGithubFailure(res);
+    return { status: 503, body: { ok: false, github: res.status } };
+  } catch (err) {
+    console.log('github unreachable', { error: err?.name ?? 'Error' });
+    return { status: 503, body: { ok: false, github: 'unreachable' } };
   }
 }
 

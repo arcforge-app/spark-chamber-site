@@ -1,7 +1,7 @@
 // Run with: npm test
 import { test, beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
-import worker, { issueFor } from '../src/worker.js';
+import worker, { issueFor, resetHealthCache } from '../src/worker.js';
 
 const env = {
   SITE_URL: 'https://sparkchamber.app',
@@ -14,6 +14,7 @@ let calls;
 let turnstileOk;
 let githubStatus;
 beforeEach(() => {
+  resetHealthCache();
   calls = [];
   turnstileOk = true;
   githubStatus = [201];
@@ -199,4 +200,76 @@ test('an overlong email field no longer rejects the report', async () => {
   const res = await post({ ...valid, email: 'x'.repeat(5000) });
   assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback-sent.html');
   assert.ok(!githubCalls()[0].init.body.includes('xxxxxxxxxx'));
+});
+
+const getHealth = (envOverride = env) => worker.fetch(new Request('https://worker.example/health'), envOverride);
+
+test('GET /health is ok when the token can read the feedback repo', async () => {
+  const res = await getHealth();
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url, 'https://api.github.com/repos/spark-chamber/spark-chamber-feedback');
+  assert.equal(calls[0].init.headers.authorization, 'Bearer test-token');
+  assert.ok(calls[0].init.signal instanceof AbortSignal);
+});
+
+test('GET /health is 503 with only the GitHub status when the token fails', async () => {
+  globalThis.fetch = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return Response.json({ message: 'Bad credentials' }, { status: 401 });
+  };
+  let res;
+  const log = await logsOf(async () => (res = await getHealth()));
+  assert.equal(res.status, 503);
+  const text = await res.text();
+  assert.deepEqual(JSON.parse(text), { ok: false, github: 401 });
+  for (const secret of ['test-token', 'test-secret']) assert.ok(!text.includes(secret) && !log.includes(secret), secret);
+  assert.match(log, /401/);
+  assert.ok(!calls.some((c) => c.url.includes('turnstile') || c.url.endsWith('/issues')));
+});
+
+test('GET /health is 503 when GitHub stalls', { timeout: 3000 }, async () => {
+  globalThis.fetch = hang;
+  const keepAlive = setInterval(() => {}, 1000);
+  try {
+    const res = await getHealth({ ...env, FETCH_TIMEOUT_MS: '50' });
+    assert.equal(res.status, 503);
+    assert.deepEqual(await res.json(), { ok: false, github: 'unreachable' });
+  } finally {
+    clearInterval(keepAlive);
+  }
+});
+
+test('GET on any other path is still 405', async () => {
+  const res = await worker.fetch(new Request('https://worker.example/'), env);
+  assert.equal(res.status, 405);
+  assert.equal(calls.length, 0);
+});
+
+test('GET /health reuses its answer for 5 minutes, so it calls GitHub once', async () => {
+  const first = await getHealth();
+  const second = await getHealth();
+  assert.equal(first.status, 200);
+  assert.equal(second.status, 200);
+  assert.deepEqual(await second.json(), { ok: true });
+  assert.equal(calls.length, 1);
+});
+
+test('a cached failing /health is reused too, then rechecked after 5 minutes', async (t) => {
+  t.mock.timers.enable({ apis: ['Date'], now: 1_000_000 });
+  globalThis.fetch = async (url, init) => {
+    calls.push({ url: String(url), init });
+    return new Response('{}', { status: calls.length === 1 ? 401 : 200 });
+  };
+  const log = await logsOf(async () => {
+    assert.equal((await getHealth()).status, 503);
+    t.mock.timers.tick(4 * 60 * 1000);
+    assert.equal((await getHealth()).status, 503);
+  });
+  assert.match(log, /401/);
+  assert.equal(calls.length, 1);
+  t.mock.timers.tick(60 * 1000);
+  assert.equal((await getHealth()).status, 200);
+  assert.equal(calls.length, 2);
 });

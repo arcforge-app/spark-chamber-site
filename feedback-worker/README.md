@@ -30,3 +30,22 @@ Tests: `npm test` (Node 22 or later; no install needed).
 ## When the token expires
 
 Create a new token as in step 3, then run `npx wrangler secret put GITHUB_TOKEN` again. Until you do, the form shows "Your report couldn't be saved just now".
+
+## Health check every other week
+
+`GET /health` on the Worker checks that the GitHub token can still reach the feedback repo. It reads the repo's basic details only: no Turnstile check, nothing filed, and no report data. It answers `200 {"ok":true}`, or `503 {"ok":false,"github":401}` with GitHub's status code (or `"unreachable"` if GitHub didn't answer within 8 s). Any other path still answers 405 to a GET. Because `/health` is public and each real check spends one GitHub API call on the feedback token, the Worker reuses its last answer, good or bad, for 5 minutes, so repeated hits can't drain the token's rate limit.
+
+The workflow `.github/workflows/feedback-health.yml` in this repo calls it every other Monday at 11:17 UTC, in even ISO weeks (6:17 a.m. Central in summer, 5:17 a.m. in winter), the same day as the weekly feedback summary. The schedule fires every Monday and skips odd weeks; a manual run always checks. Around New Year an ISO year can end on week 53 (odd) and start on week 1 (odd), so the gap can stretch to three weeks. It needs no secrets: it uses the workflow's own token, with permission to write issues only.
+
+How to read it:
+
+- **Nothing to do** while checks pass. Each run is listed under the repo's **Actions** tab, with a green check mark.
+- **On a failure**, the run turns red (GitHub emails the repo's admins), and an issue titled **"Feedback form health check failed"** opens in this repo with the HTTP status and the time. Later failures add a comment to the same issue, and the next passing check closes it.
+- **503 with `"github": 401`, 403 or 404**: the token expired or can't reach the feedback repo. See "When the token expires" above.
+- **405 or 404**: the deployed Worker is older than `/health`. Deploy `src/worker.js` again.
+- **000**: the Worker didn't answer within 20 s.
+- To check right away, open **Actions → Feedback form health check → Run workflow**.
+
+`/health` exists only once this version of `src/worker.js` is deployed (`npx wrangler deploy`, or paste it into the dashboard's **Edit code** and click **Deploy**). Until then, every check fails with 405.
+
+GitHub pauses scheduled workflows in a public repo after 60 days without any commits, and it emails the repo's admins first. To restart it, open the workflow under **Actions** and click **Enable workflow**.
