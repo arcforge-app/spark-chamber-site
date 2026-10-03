@@ -48,7 +48,7 @@
 <a href="https://app.sparkchamber.app" class="btn">Open in browser</a>
 <a href="download.html" class="btn btn-secondary">Download for Linux</a>
 </div>
-<p class="fine">It's free during Early Access, needs no account, and keeps your progress on your device.</p>
+<p class="fine">It's free during Early Access, needs no account, and keeps your progress on your device. The browser version runs on Windows, Mac, and Chromebook with nothing to install. On Linux, get the Snap.</p>
 </div>
 
 <figure class="figure">
@@ -124,6 +124,10 @@
 <p class="note">Lit topics come back for review after 1, 3, 7, 14, and 30 days. If you miss two reviews in a row, you have to master the topic again.</p>
 </div>
 </div>
+<figure class="shot">
+<img src="img/theory.webp" srcset="img/theory-800.webp 800w, img/theory.webp 1280w" sizes="(min-width: 1160px) 1112px, calc(100vw - 48px)" width="1280" height="820" loading="lazy" decoding="async" alt="The Theory map: Charge and current and Voltage and energy are lit, the topics they lead to are next, and the Digital logic, Particle physics, and Signal processing branches are locked.">
+<figcaption>Theory: every line is a real prerequisite, and the locked branches show where the subject goes next.</figcaption>
+</figure>
 </div>
 </section>
 
@@ -141,6 +145,10 @@
 <li>The Bench: wire a circuit, predict a reading, and measure it with a multimeter, an oscilloscope, a function generator, or a Bode plotter</li>
 <li>Hidden faults to find with the meter, on circuits from the problems or your own</li>
 <li>Circuits you can export to LTspice</li>
+<li>A design map: each location is a real circuit to design, build, and measure against its specification, and clearing one reveals the next</li>
+<li>Workshop labs that you run on the Bench, step by step</li>
+<li>Saved circuits, and blueprints you can open again from your library</li>
+<li>Build it for real: a breadboard layout and parts list for circuits powered by batteries or USB, at 12&nbsp;V or less</li>
 </ul>
 <p class="note">Nothing explodes. If your design works only on paper, the feedback names the effect you missed.</p>
 </div>
@@ -171,6 +179,14 @@
 </div>
 </div>
 </div>
+<figure class="shot">
+<img src="img/map.webp" srcset="img/map-800.webp 800w, img/map.webp 1280w" sizes="(min-width: 1160px) 532px, (min-width: 940px) calc(50vw - 48px), calc(100vw - 48px)" width="1280" height="820" loading="lazy" decoding="async" alt="The design map after the first location, First light, is cleared. The next location, USB status LED, is revealed with its specification: LED current 8&nbsp;mA to 12&nbsp;mA.">
+<figcaption>The design map: clear a location to reveal the next.</figcaption>
+</figure>
+<figure class="shot">
+<img src="img/bench.webp" srcset="img/bench-800.webp 800w, img/bench.webp 1280w" sizes="(min-width: 1160px) 532px, (min-width: 940px) calc(50vw - 48px), calc(100vw - 48px)" width="1280" height="820" loading="lazy" decoding="async" alt="The Bench with First light cleared: a 9&nbsp;V battery, a 1&nbsp;kΩ resistor, and a red LED. The measured LED current, 7.113&nbsp;mA, passes the 5&nbsp;mA to 10&nbsp;mA specification.">
+<figcaption>The Bench: build the circuit, measure it, and every spec line has to pass.</figcaption>
+</figure>
 </div>
 </section>
 
@@ -187,6 +203,10 @@
 <div class="check"><strong>Cross-checked</strong><span class="note">The built-in simulator solves some circuit problems a second way, as an independent check.</span></div>
 <div class="check"><strong>Reviewed</strong><span class="note">Each topic is reviewed against the sources it cites.</span></div>
 </div>
+<figure class="shot">
+<img src="img/practice.webp" srcset="img/practice-800.webp 800w, img/practice.webp 1280w" sizes="(min-width: 1160px) 1112px, calc(100vw - 48px)" width="1280" height="820" loading="lazy" decoding="async" alt="A practice problem on the resistance of 50&nbsp;m of copper hookup wire. The answer 157&nbsp;Ω gets the feedback: About 37× too high. R = ρL/A. Every quantity must be in SI units first.">
+<figcaption>Because every answer is computed, a wrong one gets feedback on the likely mistake, not just “incorrect.”</figcaption>
+</figure>
 <p class="note">Found a mistake anyway? Use the Report a problem button under the problem. We read every report.</p>
 </div>
 </section>
@@ -206,13 +226,35 @@
 <span class="chip">Particle physics</span>
 </div>
 <p class="text">Early Access covers circuits and electronics: 50 topics, from charge and current to op amps, diodes, transistors, and MOSFETs, plus reading schematics and SPICE modeling. The other subjects are planned. Each one ships only after it's written, checked, and reviewed.</p>
+<p class="text">It also has Terminology, the key terms on boards by subject, with the main ones on pages of their own, and a placement test that finds where you should start, with an “I don't know” button instead of guessing.</p>
+<figure class="shot">
+<img src="img/term.webp" srcset="img/term-800.webp 800w, img/term.webp 1280w" sizes="(min-width: 1160px) 1112px, calc(100vw - 48px)" width="1280" height="820" loading="lazy" decoding="async" alt="The Terminology page for the electron: its definition, the physics of free electrons in copper, and typical values such as its charge, −1.602&nbsp;×&nbsp;10⁻¹⁹&nbsp;C.">
+<figcaption>Terminology: the electron's page.</figcaption>
+</figure>
+
 </div>
 </section>
 
-<section id="support" class="band band-alt">
+<section id="planned" class="band band-alt">
+<div class="container stack gap-24">
+<div class="section-intro">
+<p class="eyebrow">05 · PLANNED</p>
+<h2 class="title-lg">What's planned</h2>
+<p class="text">This is the plan as it stands. It has no dates, and it may change.</p>
+</div>
+<div class="cards">
+<div class="check"><strong>Next · 0.5</strong><span class="note">Circuits I and Electronics I completed, with about 16 new topics, including nodal and mesh analysis, transients, ringing, and transistor amplifiers. Also a clearer Theory map, a new look, and complex numbers in the calculator.</span></div>
+<div class="check"><strong>After that · 0.6</strong><span class="note">The start of the physics branch, with the basics of particle physics, and redesigned location cards.</span></div>
+<div class="check"><strong>Later · 0.7 to 0.8</strong><span class="note">Ambient music and sound, and an audio probe on the Bench so you can hear the signals in your circuits.</span></div>
+<div class="check"><strong>Further out</strong><span class="note">The other subjects shown as locked on the map: digital logic, signal processing, electromagnetism, and more particle physics.</span></div>
+</div>
+</div>
+</section>
+
+<section id="support" class="band">
 <div class="container split gap-40 align-center">
 <div class="stack gap-14">
-<p class="eyebrow">05 · SUPPORT</p>
+<p class="eyebrow">06 · SUPPORT</p>
 <h2 class="title-lg">Free during Early Access</h2>
 <p class="text">Every topic, problem, and tool is free while Spark Chamber is in Early Access. There are no ads or subscriptions, and Spark Chamber collects no data to sell. If you find it useful, you can help fund its development.</p>
 </div>
@@ -227,7 +269,7 @@
 
 <footer class="site-footer">
 <div class="footer-inner">
-<span>Spark Chamber · Early Access 0.4.0</span>
+<span>Spark Chamber · Early Access 0.4.1</span>
 <div class="footer-links">
 <a href="download.html">Download</a>
 <a href="privacy.html">Privacy</a>
