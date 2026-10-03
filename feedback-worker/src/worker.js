@@ -75,8 +75,12 @@ async function humanCheck(token, env) {
       signal: timeout(env),
     });
     const data = await res.json();
-    return data.success === true;
-  } catch {
+    if (data.success === true) return true;
+    // Turnstile's own codes only (for example invalid-input-secret); nothing from the report.
+    console.log('turnstile rejected', { status: res.status, errors: data['error-codes'] ?? [] });
+    return false;
+  } catch (err) {
+    console.log('turnstile unreachable', { error: err?.name ?? 'Error' });
     return false;
   }
 }
@@ -118,10 +122,23 @@ async function fileIssue(report, env) {
     let res = await post(issue);
     // If a label can't be applied, file the report anyway rather than lose it.
     if (res.status === 422) res = await post({ title: issue.title, body: issue.body });
+    if (!res.ok) await logGithubFailure(res);
     return res.ok;
-  } catch {
+  } catch (err) {
+    console.log('github unreachable', { error: err?.name ?? 'Error' });
     return false;
   }
+}
+
+// GitHub's status and its error message (for example "Bad credentials" or
+// "Resource not accessible by personal access token"), for the Worker's log.
+// Nothing from the report itself is logged.
+async function logGithubFailure(res) {
+  let message = '';
+  try {
+    message = String((await res.json())?.message ?? '').slice(0, 200);
+  } catch {}
+  console.log('github rejected', { status: res.status, message });
 }
 
 // Visitors' text goes into the issue as quoted text that can't ping people,

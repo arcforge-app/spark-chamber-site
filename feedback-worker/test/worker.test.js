@@ -149,3 +149,39 @@ test('both outside calls carry a time limit', async () => {
   assert.equal(calls.length, 2);
   for (const call of calls) assert.ok(call.init.signal instanceof AbortSignal, call.url);
 });
+
+// Collects console.log lines while a request runs.
+async function logsOf(run) {
+  const lines = [];
+  const original = console.log;
+  console.log = (...args) => lines.push(JSON.stringify(args));
+  try {
+    await run();
+  } finally {
+    console.log = original;
+  }
+  return lines.join('\n');
+}
+const secretText = { ...valid, message: 'PRIVATE-REPORT-TEXT', email: 'student@example.com', topic: 'dividers' };
+
+test("logs GitHub's status and error message, never the report", async () => {
+  globalThis.fetch = async (url) => {
+    if (String(url).includes('turnstile')) return Response.json({ success: true });
+    return Response.json({ message: 'Bad credentials' }, { status: 401 });
+  };
+  let res;
+  const log = await logsOf(async () => (res = await post(secretText)));
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback.html?status=error');
+  assert.match(log, /401/);
+  assert.match(log, /Bad credentials/);
+  for (const secret of ['PRIVATE-REPORT-TEXT', 'student@example.com', 'dividers', 'test-token']) assert.ok(!log.includes(secret), secret);
+});
+
+test("logs Turnstile's error codes, never the report", async () => {
+  globalThis.fetch = async () => Response.json({ success: false, 'error-codes': ['invalid-input-secret'] });
+  let res;
+  const log = await logsOf(async () => (res = await post(secretText)));
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback.html?status=check');
+  assert.match(log, /invalid-input-secret/);
+  for (const secret of ['PRIVATE-REPORT-TEXT', 'student@example.com', 'dividers', 'test-secret', 'tok']) assert.ok(!log.includes(secret), secret);
+});
