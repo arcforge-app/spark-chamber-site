@@ -7,7 +7,7 @@ The site's copy was checked against `spark-chamber/electronics-app` at release 0
 | Link | Where | Points to | Blocked on |
 |---|---|---|---|
 | Open in browser | `index.html` 46, `download.html` 49 | The hosted web app | The web app (in progress in another chat) |
-| Get it from the Snap Store | `download.html` 55 | `https://snapcraft.io/spark-chamber` | Registering the name and uploading the first beta (app docs/QUESTIONS.md Q14, docs/RELEASE.md) |
+| Get it from the Snap Store | `download.html` 55 | `https://snapcraft.io/spark-chamber` | *Done 2026-10-02:* linked (the owner has installed it from the Snap Store) |
 | Support Spark Chamber | `index.html` 216 | The Ko-fi page | Creating the Ko-fi page (app Q19) |
 | Support (nav and footer) | `download.html` 31, 121 | The Ko-fi page (or `index.html#support`) | Same |
 
@@ -21,7 +21,7 @@ The site's copy was checked against `spark-chamber/electronics-app` at release 0
 
 - **Feedback repo stays private.** The site's "Report a problem" links now go to `feedback.html`, and the Worker files reports into the private repo. The app's current Report a problem text still points to the repo; it changes when the app opens the form instead.
 - **Price.** The site says "Free during Early Access" (no "forever" promise) because a one-time price at full release is being considered. If a price is decided, update the Support section on `index.html` and the intro on `download.html`.
-- **App store listing.** The app's `snap/snapcraft.yaml` lists `website:` as the private `electronics-app` repo. Point it at this site once it is live.
+- **App store listing.** *Done 2026-10-02:* the app's `snap/snapcraft.yaml` and AppStream metainfo point `website:` at https://sparkchamber.app and issues/contact at the feedback form; the next Snap upload carries it.
 
 ## Keep in step with the app
 
