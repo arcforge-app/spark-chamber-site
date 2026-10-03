@@ -89,7 +89,6 @@ test('visitor text cannot ping people, reference issues or break the table', () 
   const { title, body, labels } = issueFor({
     kind: 'other',
     message: '@owner see #12\nsecond line',
-    email: '',
     details: { topic: 'Bad Topic!', answer: 'a | b' },
   });
   assert.ok(!/@owner/.test(title) && !/#12/.test(body));
@@ -184,4 +183,20 @@ test("logs Turnstile's error codes, never the report", async () => {
   assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback.html?status=check');
   assert.match(log, /invalid-input-secret/);
   for (const secret of ['PRIVATE-REPORT-TEXT', 'student@example.com', 'dividers', 'test-secret', 'tok']) assert.ok(!log.includes(secret), secret);
+});
+
+test('a posted email address is ignored and never reaches the issue', async () => {
+  const email = 'student@example.com';
+  const res = await post({ ...valid, email, message: 'Expected 3.3 V' });
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback-sent.html');
+  const [gh] = githubCalls();
+  const sent = gh.init.body;
+  assert.ok(!sent.includes(email), 'email in the issue');
+  assert.ok(!/reply to/i.test(sent), 'reply line in the issue');
+});
+
+test('an overlong email field no longer rejects the report', async () => {
+  const res = await post({ ...valid, email: 'x'.repeat(5000) });
+  assert.equal(res.headers.get('location'), 'https://sparkchamber.app/feedback-sent.html');
+  assert.ok(!githubCalls()[0].init.body.includes('xxxxxxxxxx'));
 });

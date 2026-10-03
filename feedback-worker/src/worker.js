@@ -23,7 +23,7 @@ const DETAILS = {
   version: 'App version',
 };
 
-const LIMITS = { message: 5000, email: 200, detail: 200 };
+const LIMITS = { message: 5000, detail: 200 };
 
 // How long to wait for Turnstile, and for GitHub, before giving up. Without a
 // limit, a stalled call keeps the visitor's browser loading forever; with it,
@@ -47,8 +47,9 @@ export default {
 
     const kind = field('kind');
     const message = field('message');
-    const email = field('email');
-    if (!(kind in KINDS) || !message || message.length > LIMITS.message || email.length > LIMITS.email) {
+    // No email address is asked for or kept (owner, 2026-10-03); any posted
+    // `email` field is ignored.
+    if (!(kind in KINDS) || !message || message.length > LIMITS.message) {
       return back(env, 'invalid');
     }
     if (!(await humanCheck(field('cf-turnstile-response'), env))) return back(env, 'check');
@@ -58,7 +59,7 @@ export default {
       const value = field(key).slice(0, LIMITS.detail);
       if (value) details[key] = value;
     }
-    const ok = await fileIssue({ kind, message, email, details }, env);
+    const ok = await fileIssue({ kind, message, details }, env);
     return back(env, ok ? 'sent' : 'error');
   },
 };
@@ -85,7 +86,7 @@ async function humanCheck(token, env) {
   }
 }
 
-export function issueFor({ kind, message, email, details }) {
+export function issueFor({ kind, message, details }) {
   const firstLine = message.split('\n')[0];
   const summary = firstLine.length > 70 ? `${firstLine.slice(0, 67)}...` : firstLine;
   const title = details.topic ? `[${details.topic}] ${summary}` : summary;
@@ -93,7 +94,6 @@ export function issueFor({ kind, message, email, details }) {
   const lines = [`**Kind:** ${KINDS[kind]}`, '', '**What happened**', '', quote(message), ''];
   const rows = Object.entries(details).map(([key, value]) => `| ${DETAILS[key]} | ${cell(value)} |`);
   if (rows.length) lines.push('**Problem details (from the app)**', '', '| Field | Value |', '|---|---|', ...rows, '');
-  if (email) lines.push(`**Reply to:** ${cell(email)}`, '');
   lines.push('_Sent with the feedback form on sparkchamber.app._');
 
   const labels = [`kind:${kind}`, details.seed ? 'from:app' : 'from:web'];
