@@ -253,6 +253,13 @@ h1, h2 { overflow-wrap: break-word; hyphens: auto; }
 
 /* Home: correctness checks */
 
+/* Planned: one row per version, the label beside its text; stacked on phones */
+.roadmap { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+.roadmap li { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 6px 32px; padding: 18px 0; border-top: 1px solid var(--line-2); }
+.roadmap li:first-child { border-top: 2px solid var(--accent); }
+.roadmap .note { max-width: 46em; }
+@media (max-width: 600px) { .roadmap li { grid-template-columns: minmax(0, 1fr); } }
+
 .check { border-top: 2px solid var(--accent); padding-top: 16px; display: flex; flex-direction: column; gap: 6px; }
 
 /* Home: subject chips */
